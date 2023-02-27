@@ -10,6 +10,7 @@ export const information = {
   cities: [],
   selection: [],
   map: {},
+  image: {},
   date: {
     todayString: "",
     weekLaterString: "",

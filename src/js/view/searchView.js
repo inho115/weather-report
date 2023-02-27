@@ -25,11 +25,33 @@ class SearchView extends view {
   }
 
   _generateMarkup = function () {
-    const markup = `
+    let markup;
+    if (this._data.city && this._data.state && this._data.country) {
+      markup = `
       <button data-id=${this._data.id} class="search-result">
         <p>${this._data.city}, ${this._data.state}, ${this._data.country}</p>
       </button>
     `;
+    } else if (this._data.city && this._data.state && !this._data.country) {
+      markup = `
+      <button data-id=${this._data.id} class="search-result">
+        <p>${this._data.city}, ${this._data.state}</p>
+      </button>
+    `;
+    } else if (this._data.city && !this._data.state && !this._data.country) {
+      markup = `
+      <button data-id=${this._data.id} class="search-result">
+        <p>${this._data.city}</p>
+      </button>
+    `;
+    } else if (this._data.city && this._data.state && this._data.country) {
+      markup = `
+      <button data-id=${this._data.id} class="search-result">
+        <p>${this._data.city}, ${this._data.country}</p>
+      </button>
+    `;
+    }
+
     return markup;
   };
 }

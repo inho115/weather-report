@@ -1,10 +1,11 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import { async } from "regenerator-runtime";
 import * as model from "./model.js";
 import resultsView from "./view/resultsView.js";
 import searchView from "./view/searchView.js";
 import summaryView from "./view/summaryView.js";
-import "core-js/stable";
-import "regenerator-runtime/runtime";
-import { async } from "regenerator-runtime";
+import timeView from "./view/timeView.js";
 
 const controlCitySearch = async function () {
   try {
@@ -25,18 +26,19 @@ const controlSelect = async function (id) {
     model.changeMap();
 
     // 3. load weather information
-    await controlWeather();
+    await model.loadWeather();
 
     // 4. Update weather information
-    summaryView.addHandlerCurrent(model.information.current);
+    summaryView.render(model.information.current);
+
+    // 5. Display city name and date
+    timeView.render({
+      ...model.information.date,
+      ...model.information.selection,
+    });
   } catch (err) {
     console.log(err);
   }
-};
-
-const controlWeather = async function () {
-  // 1. load weather information (current, hourly, daily)
-  await model.loadWeather();
 };
 
 const init = function () {
