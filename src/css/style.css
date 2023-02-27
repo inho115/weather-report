@@ -131,6 +131,16 @@
   text-align: center;
 }
 
+.currentIcon {
+  display: inline-block;
+  width: 9em;
+  height: 9em;
+  stroke-width: 0;
+  stroke: #fff;
+  fill: currentColor;
+  padding: 2.4rem;
+}
+
 .summary {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -170,11 +180,12 @@
 }
 
 .summary-card {
-  background-color: #e0cdb58a;
+  background-color: #e0cdb5a8;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.09);
 }
 
