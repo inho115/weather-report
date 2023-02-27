@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Reporter</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="src/css/style.css" />
+    <link rel="stylesheet" href="src/css/general.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
+
+    <script type="module" src="src/js/controller.js"></script>
+  </head>
+  <body>
+    <div class="intro">
+      <header class="header">
+        <a href="#" class="logo">Weather Reporter</a>
+        <nav class="nav">
+          <ul class="nav-list">
+            <li><a class="nav-link" href="#">Hourly</a></li>
+            <li><a class="nav-link" href="#">Daily</a></li>
+            <li><a class="nav-link" href="#">Weekly</a></li>
+          </ul>
+        </nav>
+      </header>
+      <section class="section--search">
+        <div class="container container--search">
+          <div class="search-bar">
+            <form class="search-form">
+              <input
+                class="search-input"
+                type="text"
+                placeholder="Please enter name of the city"
+              />
+            </form>
+          </div>
+          <div class="results"></div>
+          <div class="summary">
+            <div class="summary-text-box grid-col--2">
+              <div class="summary-card">
+                <p class="summary-text">Temperature</p>
+                <p class="summary-text small temperature"></p>
+                <p class="summary-text">Current status</p>
+                <p class="summary-text small weatherCode"></p>
+              </div>
+              <div class="summary-card">
+                <p class="summary-text">Wind Speed</p>
+                <p class="summary-text small windSpeed"></p>
+                <p class="summary-text">Wind Direction</p>
+                <p class="summary-text small windDirection"></p>
+              </div>
+            </div>
+            <div class="map-container">
+              <div id="map"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
