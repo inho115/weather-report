@@ -36,6 +36,26 @@ const controlSelect = async function (id) {
       ...model.information.date,
       ...model.information.selection,
     });
+
+    // 6. render daily
+
+    // 7. render hourly
+
+    // 8. create controlPagination()
+
+    // 9. create paginationView(including _generateMarkup(), addHandlerClick()) and send it to paginationView.addHandlerClick(control pagination)
+
+    // once page is loaded, idealy should render based on user's location
+
+    // **** celcius ferenheit conversion button
+
+    // **** need to create function to find out closest hour to current time, to use for rendering hourly from that hour
+
+    // **** need to creat function to transform wind direction to abbreviation (like NE, SW) from degree (130). Makes it more human readable
+
+    // **** need to create function to adjust icon based on recieved weather code, currently on summary view, but should be on model.
+
+    // **** need to create box for error messages (for when couldnt find city by a input)
   } catch (err) {
     console.log(err);
   }
@@ -46,6 +66,7 @@ const init = function () {
   model.getDate();
   searchView.addHandlerSearch(controlCitySearch);
   resultsView.addHandlerSelect(controlSelect);
+  // paginationView.addHandlerClick(control pagination) --> render next few hours on the hourly section, daily will be chart
 };
 init();
 

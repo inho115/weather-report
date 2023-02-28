@@ -54,7 +54,9 @@ const createHourly = function (data) {
     temperature: data.temperature_2m,
     visibility: data.visibility,
     weatherCode: data.weathercode,
-    windSpeed: data.windspeed,
+    windSpeed: data.windspeed_10m,
+    snowDepth: data.snowDepth,
+    feelsLike: data.apparent_temperature,
   };
 };
 
@@ -143,7 +145,7 @@ export const getDate = function () {
   const newDate = addWeeks(date, 1);
   const newMonthAlpha = months[newDate.getMonth()];
   const newMonthNum = zeroInserter(newDate.getMonth() + 1);
-  const newDay = zeroInserter(newDate.getDate());
+  const newDay = zeroInserter(newDate.getDate() - 1);
   const newYear = newDate.getFullYear();
   const formattedNewDate = `${newMonthAlpha} ${newDay}, ${newYear}`;
   const formattedNewNumDate = `${newYear}-${newMonthNum}-${newDay}`;

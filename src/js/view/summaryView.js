@@ -60,8 +60,7 @@ class summaryView extends view {
       +this._data.weatherCode === 99
     )
       icon = "icon-cloud-lightning";
-    console.log(icon);
-    console.log(this._data.weatherCode);
+
     const markup = `
       <div class="summary-card">
         <p class="summary-text">Temperature</p>

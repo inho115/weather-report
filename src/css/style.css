@@ -12,15 +12,15 @@
 
 .logo:link,
 .logo:visited {
-  color: black;
-  font-size: 2.5rem;
+  color: #e67e22;
   text-decoration: none;
   transition: all 0.3s;
 }
 
 .logo:hover,
 .logo:active {
-  color: #e67e22;
+  text-decoration: underline;
+  text-decoration-color: #e67e22;
 }
 
 .nav-list {
@@ -33,18 +33,22 @@
 
 .nav-link:link,
 .nav-link:visited {
-  color: black;
-  font-size: 2.5rem;
+  color: #e67e22;
   text-decoration: none;
   transition: all 0.3s;
 }
 
 .nav-link:hover,
 .nav-link:active {
-  color: #e67e22;
+  text-decoration: underline;
+  text-decoration-color: #e67e22;
 }
 
 /******************************* SECTION SEARCH *******************************************/
+
+.cityName {
+  color: #e67e22;
+}
 
 .section--search {
   padding: 4.8rem 0 9.6rem 0;
@@ -84,8 +88,13 @@
 }
 
 .search-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.733);
+}
+
+.search-input:focus {
   transform: translateY(-1rem);
-  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.09);
+  box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.733);
 }
 
 .search-result {
@@ -133,12 +142,12 @@
 
 .currentIcon {
   display: inline-block;
-  width: 9em;
-  height: 9em;
+  width: 6.2em;
+  height: 6.2em;
   stroke-width: 0;
   stroke: #fff;
   fill: currentColor;
-  padding: 2.4rem;
+  padding: 0 2.4rem 0 2.4rem;
 }
 
 .summary {
@@ -172,11 +181,7 @@
   align-self: center;
   font-weight: 800;
   font-size: 3.6rem;
-  padding: 2.5rem;
-}
-
-.small {
-  font-size: 2.4rem;
+  padding: 2.4rem;
 }
 
 .summary-card {
