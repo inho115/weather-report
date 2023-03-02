@@ -40,23 +40,37 @@ const createCity = function (data) {
 
 const createCurrent = function (data) {
   return {
-    temperature: data.temperature,
-    weatherCode: data.weathercode,
-    windSpeed: data.windspeed,
+    celsius: data.temperature,
+    farenheit: (+data.temperature * 1.8 + 32).toFixed(1),
+    weatherCode: iconSelector(data.weathercode),
+    windSpeedKilo: +data.windspeed,
+    windSpeedMile: (Math.round((+data.windspeed / 1.609) * 10) / 10).toFixed(1),
     windDirection: data.winddirection,
   };
 };
 
 const createHourly = function (data) {
   return {
-    precipitation: data.precipitation,
     humidity: data.relativehumidity_2m,
-    temperature: data.temperature_2m,
-    visibility: data.visibility,
-    weatherCode: data.weathercode,
-    windSpeed: data.windspeed_10m,
-    snowDepth: data.snowDepth,
-    feelsLike: data.apparent_temperature,
+    celsius: data.temperature_2m,
+    farenheit: data.temperature_2m.map((temp) => (+temp * 1.8 + 32).toFixed(1)),
+    visibilityKilo: data.visibility.map((meter) => +meter / 1000),
+    visibilityMile: data.visibility.map((meter) =>
+      (+meter / 1000 / 1.609).toFixed(1)
+    ),
+    originalWeatherCode: data.weathercode,
+    weatherCode: data.weathercode.map((weatherCode) =>
+      iconSelector(weatherCode)
+    ),
+    windDirection: data.winddirection_10m,
+    windSpeedKilo: data.windspeed_10m,
+    windSpeedMile: data.windspeed_10m.map((kilo) => (+kilo / 1.609).toFixed(1)),
+    snowDepthMeter: data.snow_depth,
+    snowDepthFeet: data.snow_depth,
+    feelsLikeCelcius: data.apparent_temperature,
+    feelsLikeFarenheit: data.apparent_temperature.map((temp) =>
+      (+temp * 1.8 + 32).toFixed(1)
+    ),
   };
 };
 
@@ -64,14 +78,20 @@ const createDaily = function (data) {
   return {
     rainSum: data.rain_sum,
     snowfallSum: data.snowfall_sum,
-    sunrise: data.sunrise,
-    sunset: data.sunset,
+    sunrise: data.sunrise.map((time) => time.slice(11, time.length)),
+    sunset: data.sunset.map((time) => time.slice(11, time.length)),
     temperatureMax: data.temperature_2m_max,
     temperatureMin: data.temperature_2m_min,
-    uvMax: data.uv_index_max,
-    weatherCode: data.weathercode,
+    uvMax: data.uv_index_max.map((uv) => Math.round(uv)),
+    originalWeatherCode: data.weathercode,
+    weatherCode: data.weathercode.map((weatherCode) =>
+      iconSelector(weatherCode)
+    ),
     windDirection: data.winddirection_10m_dominant,
-    windSpeed: data.windspeed_10m_max,
+    windSpeedKilo: data.windspeed_10m_max,
+    windSpeedMile: data.windspeed_10m_max.map((speed) =>
+      Math.round(+speed / 1.609).toFixed(1)
+    ),
   };
 };
 
@@ -115,6 +135,9 @@ export const loadWeather = async function () {
   information.current = createCurrent(response.current_weather);
   information.hourly = createHourly(response.hourly);
   information.daily = createDaily(response.daily);
+  console.log("current", information.current);
+  console.log("hourly", information.hourly);
+  console.log("daily", information.daily);
 };
 
 ////////////////////////////////////////////////////////// Date Functions ////////////////////////////////////////////////////////////
@@ -165,5 +188,33 @@ const zeroInserter = function (date) {
   return +date < 10 ? `0${date}` : date;
 };
 
-// for sunset and sunrise, reformat to
-// time.slice(11, time.length);
+const iconSelector = function (array) {
+  const iconCloudSun = [1, 2, 3];
+  const iconCloudFog = [45, 48];
+  const iconRain = [51, 53, 55, 56, 57];
+  const iconRainAlot = [61, 63, 65, 66, 67];
+  const iconRainViolent = [80, 81, 82];
+  const iconSnow = [71, 73, 75, 77];
+  const iconSnowAlot = [85, 86];
+  const iconCloudLightning = [95, 96, 99];
+
+  if (array === 0) {
+    return "icon-sunny";
+  } else if (iconCloudSun.some((weatherCode) => weatherCode === array)) {
+    return "icon-cloud-sun";
+  } else if (iconCloudFog.some((weatherCode) => weatherCode === array)) {
+    return "icon-cloud-fog";
+  } else if (iconRain.some((weatherCode) => weatherCode === array)) {
+    return "icon-rain";
+  } else if (iconRainAlot.some((weatherCode) => weatherCode === array)) {
+    return "icon-rain-alot";
+  } else if (iconRainViolent.some((weatherCode) => weatherCode === array)) {
+    return "icon-rain-violent";
+  } else if (iconSnow.some((weatherCode) => weatherCode === array)) {
+    return "icon-snow";
+  } else if (iconSnowAlot.some((weatherCode) => weatherCode === array)) {
+    return "icon-snow-alot";
+  } else if (iconCloudLightning.some((weatherCode) => weatherCode === array)) {
+    return "icon-cloud-lightning";
+  }
+};

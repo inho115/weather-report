@@ -140,14 +140,20 @@
   text-align: center;
 }
 
-.currentIcon {
-  display: inline-block;
+.current-status-icon {
+  /* display: inline-block; */
   width: 6.2em;
   height: 6.2em;
-  stroke-width: 0;
-  stroke: #fff;
   fill: currentColor;
   padding: 0 2.4rem 0 2.4rem;
+}
+
+.wind-direction-icon {
+  width: 4.8em;
+  height: 4.8em;
+  fill: currentColor;
+  padding: 0 2.4rem 2.4rem 2.4rem;
+  /* transform: rotate(180deg); */
 }
 
 .summary {
