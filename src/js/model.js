@@ -17,9 +17,43 @@ export const information = {
     todayNum: [],
     weekLaterNum: [],
   },
-  current: {},
-  hourly: {},
-  daily: {},
+  current: [],
+  hourly: [
+    {
+      humidity: "",
+      celsius: "",
+      farenheit: "",
+      visibilityKilo: "",
+      visibilityMile: "",
+      originalWeatherCode: "",
+      weatherCode: "",
+      windDirection: "",
+      windSpeedKilo: "",
+      windSpeedMile: "",
+      snowDepthMeter: "",
+      snowDepthFeet: "",
+      feelsLikeCelsius: "",
+      feelsLikeFarenheit: "",
+      precipitation: "",
+      cloudCover: "",
+    },
+  ],
+  daily: [
+    {
+      rainSum: "",
+      snowfallSum: "",
+      sunrise: "",
+      sunset: "",
+      temperatureMax: "",
+      temperatureMin: "",
+      uvMax: "",
+      originalWeatherCode: "",
+      weatherCode: "",
+      windDirection: "",
+      windSpeedKilo: "",
+      windSpeedMile: "",
+    },
+  ],
 };
 
 const createCity = function (data) {
@@ -40,8 +74,8 @@ const createCity = function (data) {
 
 const createCurrent = function (data) {
   return {
-    celsius: data.temperature,
-    farenheit: (+data.temperature * 1.8 + 32).toFixed(1),
+    celsius: `${data.temperature} °C`,
+    farenheit: `${(+data.temperature * 1.8 + 32).toFixed(1)} °F`,
     weatherCode: iconSelector(data.weathercode),
     windSpeedKilo: +data.windspeed,
     windSpeedMile: (Math.round((+data.windspeed / 1.609) * 10) / 10).toFixed(1),
@@ -50,49 +84,50 @@ const createCurrent = function (data) {
 };
 
 const createHourly = function (data) {
-  return {
-    humidity: data.relativehumidity_2m,
-    celsius: data.temperature_2m,
-    farenheit: data.temperature_2m.map((temp) => (+temp * 1.8 + 32).toFixed(1)),
-    visibilityKilo: data.visibility.map((meter) => +meter / 1000),
-    visibilityMile: data.visibility.map((meter) =>
-      (+meter / 1000 / 1.609).toFixed(1)
-    ),
-    originalWeatherCode: data.weathercode,
-    weatherCode: data.weathercode.map((weatherCode) =>
-      iconSelector(weatherCode)
-    ),
-    windDirection: data.winddirection_10m,
-    windSpeedKilo: data.windspeed_10m,
-    windSpeedMile: data.windspeed_10m.map((kilo) => (+kilo / 1.609).toFixed(1)),
-    snowDepthMeter: data.snow_depth,
-    snowDepthFeet: data.snow_depth,
-    feelsLikeCelcius: data.apparent_temperature,
-    feelsLikeFarenheit: data.apparent_temperature.map((temp) =>
-      (+temp * 1.8 + 32).toFixed(1)
-    ),
-  };
+  const hourly = data.relativehumidity_2m.map((info, i) => {
+    return {
+      time: `${zeroInserter(i)}:00`,
+      humidity: data.relativehumidity_2m[i],
+      celsius: `${data.temperature_2m[i]} °C`,
+      farenheit: `${(data.temperature_2m[i] * 1.8 + 32).toFixed(1)} °F`,
+      visibilityKilo: data.visibility[i] / 1000,
+      visibilityMile: (data.visibility[i] / 1000 / 1.609).toFixed(1),
+      originalWeatherCode: data.weathercode[i],
+      weatherCode: iconSelector(data.weathercode[i], i),
+      windDirection: data.winddirection_10m[i],
+      windSpeedKilo: data.windspeed_10m[i],
+      windSpeedMile: (data.windspeed_10m[i] / 1.609).toFixed(1),
+      snowDepthMeter: data.snow_depth[i],
+      snowDepthFeet: data.snow_depth[i],
+      feelsLikeCelcius: `${data.apparent_temperature[i]} °C`,
+      feelsLikeFarenheit: `${(data.apparent_temperature[i] * 1.8 + 32).toFixed(
+        1
+      )} °F`,
+      precipitation: data.precipitation_probability[i],
+      cloudCover: data.cloudcover_low[i],
+    };
+  });
+  return hourly;
 };
 
 const createDaily = function (data) {
-  return {
-    rainSum: data.rain_sum,
-    snowfallSum: data.snowfall_sum,
-    sunrise: data.sunrise.map((time) => time.slice(11, time.length)),
-    sunset: data.sunset.map((time) => time.slice(11, time.length)),
-    temperatureMax: data.temperature_2m_max,
-    temperatureMin: data.temperature_2m_min,
-    uvMax: data.uv_index_max.map((uv) => Math.round(uv)),
-    originalWeatherCode: data.weathercode,
-    weatherCode: data.weathercode.map((weatherCode) =>
-      iconSelector(weatherCode)
-    ),
-    windDirection: data.winddirection_10m_dominant,
-    windSpeedKilo: data.windspeed_10m_max,
-    windSpeedMile: data.windspeed_10m_max.map((speed) =>
-      Math.round(+speed / 1.609).toFixed(1)
-    ),
-  };
+  const daily = data.rain_sum.map((info, i) => {
+    return {
+      rainSum: data.rain_sum[i],
+      snowfallSum: data.snowfall_sum[i],
+      sunrise: data.sunrise[i].slice(11, data.sunrise[i].length),
+      sunset: data.sunset[i].slice(11, data.sunset[i].length),
+      temperatureMax: data.temperature_2m_max[i],
+      temperatureMin: data.temperature_2m_min[i],
+      uvMax: data.uv_index_max[i],
+      originalWeatherCode: data.weathercode[i],
+      weatherCode: iconSelector(data.weathercode[i]),
+      windDirection: data.winddirection_10m_dominant[i],
+      windSpeedKilo: data.windspeed_10m_max[i],
+      windSpeedMile: Math.round(+data.windspeed_10m_max[i] / 1.609).toFixed(1),
+    };
+  });
+  return daily;
 };
 
 export const loadCitySearchResults = async function (query) {
@@ -132,12 +167,11 @@ export const loadWeather = async function () {
     `${WEATHER_API_URL}/?latitude=${information.selection.lat}&longitude=${information.selection.lng}&current_weather=true${HOURLY_PARAMETER}${DAILY_PARAMETER}&start_date=${information.date.todayNum}&end_date=${information.date.weekLaterNum}`
   );
   const response = await request.json();
+
   information.current = createCurrent(response.current_weather);
   information.hourly = createHourly(response.hourly);
   information.daily = createDaily(response.daily);
-  console.log("current", information.current);
-  console.log("hourly", information.hourly);
-  console.log("daily", information.daily);
+  console.log(information.hourly);
 };
 
 ////////////////////////////////////////////////////////// Date Functions ////////////////////////////////////////////////////////////
@@ -188,7 +222,7 @@ const zeroInserter = function (date) {
   return +date < 10 ? `0${date}` : date;
 };
 
-const iconSelector = function (array) {
+const iconSelector = function (code, time = 0) {
   const iconCloudSun = [1, 2, 3];
   const iconCloudFog = [45, 48];
   const iconRain = [51, 53, 55, 56, 57];
@@ -198,23 +232,23 @@ const iconSelector = function (array) {
   const iconSnowAlot = [85, 86];
   const iconCloudLightning = [95, 96, 99];
 
-  if (array === 0) {
-    return "icon-sunny";
-  } else if (iconCloudSun.some((weatherCode) => weatherCode === array)) {
-    return "icon-cloud-sun";
-  } else if (iconCloudFog.some((weatherCode) => weatherCode === array)) {
+  if (code === 0) {
+    return +time < 18 ? "icon-sunny" : "icon-moon-stars";
+  } else if (iconCloudSun.some((weatherCode) => weatherCode === code)) {
+    return +time < 18 ? "icon-cloud-sun" : "icon-cloud-moon";
+  } else if (iconCloudFog.some((weatherCode) => weatherCode === code)) {
     return "icon-cloud-fog";
-  } else if (iconRain.some((weatherCode) => weatherCode === array)) {
+  } else if (iconRain.some((weatherCode) => weatherCode === code)) {
     return "icon-rain";
-  } else if (iconRainAlot.some((weatherCode) => weatherCode === array)) {
+  } else if (iconRainAlot.some((weatherCode) => weatherCode === code)) {
     return "icon-rain-alot";
-  } else if (iconRainViolent.some((weatherCode) => weatherCode === array)) {
+  } else if (iconRainViolent.some((weatherCode) => weatherCode === code)) {
     return "icon-rain-violent";
-  } else if (iconSnow.some((weatherCode) => weatherCode === array)) {
+  } else if (iconSnow.some((weatherCode) => weatherCode === code)) {
     return "icon-snow";
-  } else if (iconSnowAlot.some((weatherCode) => weatherCode === array)) {
+  } else if (iconSnowAlot.some((weatherCode) => weatherCode === code)) {
     return "icon-snow-alot";
-  } else if (iconCloudLightning.some((weatherCode) => weatherCode === array)) {
+  } else if (iconCloudLightning.some((weatherCode) => weatherCode === code)) {
     return "icon-cloud-lightning";
   }
 };

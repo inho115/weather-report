@@ -6,6 +6,7 @@ import resultsView from "./view/resultsView.js";
 import searchView from "./view/searchView.js";
 import summaryView from "./view/summaryView.js";
 import timeView from "./view/timeView.js";
+import hourlyView from "./view/hourlyView.js";
 
 const controlCitySearch = async function () {
   try {
@@ -30,7 +31,6 @@ const controlSelect = async function (id) {
 
     // 4. Update weather information
     summaryView.render(model.information.current);
-    summaryView.test();
 
     // 5. Display city name and date
     timeView.render({
@@ -38,9 +38,10 @@ const controlSelect = async function (id) {
       ...model.information.selection,
     });
 
-    // 6. render daily
+    // 6. render hourly
+    hourlyView.render(model.information.hourly.slice(17, 24));
 
-    // 7. render hourly
+    // 7. render daily
 
     // 8. create controlPagination()
 
@@ -48,13 +49,7 @@ const controlSelect = async function (id) {
 
     // once page is loaded, idealy should render based on user's location
 
-    // **** celcius ferenheit conversion button - ALMOST DONE
-
     // **** need to create function to find out closest hour to current time, to use for rendering hourly from that hour
-
-    // **** need to create function to transform wind direction to abbreviation (like NE, SW) from degree (130). Makes it more human readable -
-
-    // **** need to create function to adjust icon based on recieved weather code, currently on summary view, but should be on model. - DONE
 
     // **** need to create box for error messages (for when couldnt find city by a input)
   } catch (err) {

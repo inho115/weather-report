@@ -26,10 +26,6 @@ class summaryView extends view {
     `;
     return markup;
   }
-
-  test() {
-    console.log(this._parentEl);
-  }
 }
 
 export default new summaryView();

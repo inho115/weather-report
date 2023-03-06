@@ -1,9 +1,11 @@
 import view from "./view.js";
 import resultsView from "./resultsView.js";
+import summaryView from "./summaryView";
 
 class SearchView extends view {
   _parentEl = document.querySelector(".search-form");
   _input = document.querySelector(".search-input");
+  _container = document.querySelector(".information");
 
   _getQuery() {
     const query = this._input.value;
@@ -18,8 +20,10 @@ class SearchView extends view {
 
   addHandlerSearch(handler) {
     this._parentEl.addEventListener("submit", function (e) {
+      const container = document.querySelector(".information");
       e.preventDefault();
       resultsView._parentEl.classList.remove("hidden");
+      container.classList.remove("slide-up");
       handler();
     });
   }

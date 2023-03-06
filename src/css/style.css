@@ -79,7 +79,7 @@
   width: 100%;
   border: none;
   border-radius: 20px;
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-family: inherit;
   text-align: center;
   padding: 2.5rem 2.5rem;
@@ -89,22 +89,42 @@
 
 .search-input:focus {
   outline: none;
-  box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.733);
-}
-
-.search-input:focus {
   transform: translateY(-1rem);
   box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.733);
 }
 
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  transition: all 0.8s ease-in-out;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translateX(-100%);
+}
+
 .search-result {
+  font-size: 2rem;
+  font-weight: 600;
   font-family: inherit;
-  width: 70%;
+  width: 50%;
   padding: 1.5rem;
   border: none;
   border-radius: 20px;
   margin-bottom: 1.2rem;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
   transition: all 0.3s;
+}
+
+.search-result:last-child {
+  margin-bottom: 3.6rem;
 }
 
 .search-result:hover {
@@ -113,26 +133,17 @@
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.09);
 }
 
-.result-link {
-  color: black;
-  font-size: 1.5rem;
-  text-decoration: none;
-}
-
-.results {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  transition: all 0.3s;
-}
-
-.search-result {
-  font-size: 2rem;
-  font-weight: 600;
-}
-
 /******************************* SUMMARY *******************************************/
+
+.information {
+  width: 100%;
+  height: 100%;
+  transition: all 0.8s;
+}
+
+.slide-up {
+  transform: translateY(-90%);
+}
 
 .currentTime {
   font-weight: 800;
@@ -141,7 +152,6 @@
 }
 
 .current-status-icon {
-  /* display: inline-block; */
   width: 6.2em;
   height: 6.2em;
   fill: currentColor;
@@ -153,7 +163,6 @@
   height: 4.8em;
   fill: currentColor;
   padding: 0 2.4rem 2.4rem 2.4rem;
-  /* transform: rotate(180deg); */
 }
 
 .summary {
@@ -216,6 +225,84 @@
 /******************************* END OF SECTION SEARCH *******************************************/
 
 /******************************* SECTION HOURLY *******************************************/
-.search-daily {
-  padding: 4.8rem 0 9.6rem 0;
+.section--hourly {
+  padding: 9.6rem;
+}
+
+.container--hourly {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.short-information {
+  font-size: 2.4rem;
+  display: flex;
+  width: 100%;
+  background-color: #fff;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.icon-set {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.expand-information {
+  flex: 0.5;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon-btn {
+  border: none;
+  outline: none;
+  font-size: 2.4rem;
+  background-color: transparent;
+}
+
+.small-icon {
+  display: block;
+  width: 3.2em;
+  height: 3.2em;
+  padding: 0 2.4rem 0 2.4rem;
+}
+
+.medium-icon {
+  display: block;
+  width: 3.6em;
+  height: 3.6em;
+  padding: 0 2.4rem 0 2.4rem;
+}
+
+.long-information {
+  font-size: 2.4rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 95%;
+  background-color: #fff;
+  justify-content: space-between;
+  transition: all 0.5s;
+  margin-bottom: 0rem;
+  transition: all 0.5s;
+}
+
+.up {
+  opacity: 0;
+  margin-bottom: 0;
+}
+
+.slide {
+  transform: translateY(-70%);
+}
+
+@media (max-width: 87.5em) {
+  .grid-col--2 {
+    grid-template-columns: 1fr;
+  }
 }

@@ -8,9 +8,11 @@ class ResultsView extends view {
 
   addHandlerSelect(handler) {
     this._parentEl.addEventListener("click", function (e) {
+      const container = document.querySelector(".information");
       const btn = e.target.closest(".search-result");
       if (!btn) return;
       this.classList.add("hidden");
+      container.classList.add("slide-up");
       handler(btn.dataset.id);
     });
   }
