@@ -23,7 +23,7 @@ class SearchView extends view {
       const container = document.querySelector(".information");
       e.preventDefault();
       resultsView._parentEl.classList.remove("hidden");
-      container.classList.remove("slide-up");
+      container.classList.add("slide-up");
       handler();
     });
   }

@@ -1,5 +1,4 @@
 .intro {
-  height: 100vh;
   background-image: linear-gradient(
       to right bottom,
       rgba(73, 140, 138, 0.35),
@@ -52,11 +51,11 @@
 
 .section--search {
   padding: 4.8rem 0 9.6rem 0;
+  position: relative;
 }
 
 .container--search {
   display: flex;
-  height: 80vh;
   flex-direction: column;
   align-items: center;
   transition: all 0.3s;
@@ -94,10 +93,12 @@
 }
 
 .results {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-direction: column;
+  transform: translateY(20%);
   transition: all 0.8s ease-in-out;
 }
 
@@ -142,7 +143,8 @@
 }
 
 .slide-up {
-  transform: translateY(-90%);
+  transform: translateY(100%);
+  transition: all 1s;
 }
 
 .currentTime {
@@ -188,6 +190,7 @@
       rgba(73, 140, 138, 0.993)
     ),
     url("../img/city.jpg");
+  min-height: 50rem;
 }
 
 .summary-text {
@@ -214,6 +217,7 @@
   height: 100%;
   background-color: #fff;
   border-radius: 20px;
+  min-height: 50rem;
 }
 
 #map {
@@ -227,12 +231,14 @@
 /******************************* SECTION HOURLY *******************************************/
 .section--hourly {
   padding: 9.6rem;
+  background-color: #e5e7eb;
 }
 
 .container--hourly {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   transition: all 0.3s;
 }
 
@@ -243,6 +249,8 @@
   background-color: #fff;
   justify-content: space-between;
   margin-bottom: 1rem;
+  border-radius: 20px;
+  border-bottom: 5px solid rgba(73, 140, 138, 0.993);
 }
 
 .icon-set {
@@ -264,6 +272,8 @@
   outline: none;
   font-size: 2.4rem;
   background-color: transparent;
+  transition: all 0.9s;
+  border-radius: 20px;
 }
 
 .small-icon {
@@ -281,13 +291,16 @@
 }
 
 .long-information {
-  font-size: 2.4rem;
+  width: 95%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 95%;
+  font-size: 2.4rem;
   background-color: #fff;
   justify-content: space-between;
-  transition: all 0.5s;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.09);
+  transition: all 0.3s;
 }
 
 .hidden-info {

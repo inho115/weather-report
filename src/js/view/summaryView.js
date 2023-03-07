@@ -9,7 +9,7 @@ class summaryView extends view {
     const markup = `
       <div class="summary-card">
         <p class="summary-text">Temperature</p>
-        <p class="summary-text small temperature">${this._data.celsius} °C</p>
+        <p class="summary-text small temperature">${this._data.celsius}</p>
         <p class="summary-text">Current status</p>
         <svg class="current-status-icon">
           <use href="${icons}#${this._data.weatherCode}"></use>
@@ -17,7 +17,7 @@ class summaryView extends view {
       </div>
       <div class="summary-card">
         <p class="summary-text">Wind Speed</p>
-        <p class="summary-text small windSpeed">${this._data.windSpeedKilo} km/h</p>
+        <p class="summary-text small windSpeed">${this._data.windSpeedKilo}</p>
         <p class="summary-text" >Wind Direction</p>
         <svg class="wind-direction-icon" style="transform:rotate(${this._data.windDirection}deg)">
           <use href="${icons}#icon-arrow-up"></use>

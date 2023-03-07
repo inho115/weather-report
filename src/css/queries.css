@@ -1,0 +1,10 @@
+@media (max-width: 45em) {
+  .summary {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .slide-up {
+    transform: translateY(-60%);
+  }
+}

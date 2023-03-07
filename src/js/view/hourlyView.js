@@ -5,7 +5,7 @@ import icons from "url:../../img/icons.svg";
 import { async } from "regenerator-runtime";
 
 class hourlyView extends view {
-  _parentEl = document.querySelector(".section--hourly");
+  _parentEl = document.querySelector(".hourly");
 
   _generateMarkup = function () {
     const str = this._data
@@ -17,8 +17,8 @@ class hourlyView extends view {
   _generateInfo = function (data, index) {
     const markup = `
       <div class="container container--hourly" data-container="${index}" data-translate="${
-      -70 * +index
-    }" style="transform:translateY(${-70 * +index}%)">
+      -60 * +index
+    }" style="transform:translateY(${-60 * +index}%)">
         <div class="short-information">
           <div class="icon-set">
             <p>${data.time}</p>
@@ -109,31 +109,35 @@ class hourlyView extends view {
   addHandlerExpand() {
     this._parentEl.addEventListener("click", function (e) {
       const expandBtn = e.target.closest(".icon-expand-btn");
+      if (!expandBtn) return;
       const id = expandBtn.dataset.id;
       const detail = document.getElementById(`${id}`);
-      if (!expandBtn) return;
+      expandBtn.style.rotate = "180deg";
+      expandBtn.classList.toggle("rotated");
+      expandBtn.style.rotate = expandBtn.classList.contains("rotated")
+        ? "180deg"
+        : "-360deg";
+
       detail.classList.toggle("hidden-info");
 
       if (!detail.classList.contains("hidden-info")) {
         for (let i = id; i <= 6; i++) {
-          console.log(i);
           let next = document.querySelector(`[data-container="${+i + 1}"]`);
           if (next) {
             next.style.transform = `translateY(${
-              +next.dataset.translate + 70
+              +next.dataset.translate + 60
             }%)`;
-            next.dataset.translate = `${+next.dataset.translate + 70}`;
+            next.dataset.translate = `${+next.dataset.translate + 60}`;
           }
         }
       } else {
         for (let i = id; i <= 6; i++) {
-          console.log(i);
           let next = document.querySelector(`[data-container="${+i + 1}"]`);
           if (next) {
             next.style.transform = `translateY(${
-              +next.dataset.translate - 70
+              +next.dataset.translate - 60
             }%)`;
-            next.dataset.translate = `${+next.dataset.translate - 70}`;
+            next.dataset.translate = `${+next.dataset.translate - 60}`;
           }
         }
       }

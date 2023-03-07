@@ -12,7 +12,7 @@ class ResultsView extends view {
       const btn = e.target.closest(".search-result");
       if (!btn) return;
       this.classList.add("hidden");
-      container.classList.add("slide-up");
+      container.classList.remove("slide-up");
       handler(btn.dataset.id);
     });
   }
