@@ -77,8 +77,10 @@ const createCurrent = function (data) {
     celsius: `${data.temperature} °C`,
     farenheit: `${(+data.temperature * 1.8 + 32).toFixed(1)} °F`,
     weatherCode: iconSelector(data.weathercode),
-    windSpeedKilo: +data.windspeed,
-    windSpeedMile: (Math.round((+data.windspeed / 1.609) * 10) / 10).toFixed(1),
+    windSpeedKilo: `${data.windspeed} km/h`,
+    windSpeedMile: `${(Math.round((+data.windspeed / 1.609) * 10) / 10).toFixed(
+      1
+    )} mi/h`,
     windDirection: data.winddirection,
   };
 };
@@ -87,24 +89,24 @@ const createHourly = function (data) {
   const hourly = data.relativehumidity_2m.map((info, i) => {
     return {
       time: `${zeroInserter(i)}:00`,
-      humidity: data.relativehumidity_2m[i],
+      humidity: `${data.relativehumidity_2m[i]} %`,
       celsius: `${data.temperature_2m[i]} °C`,
       farenheit: `${(data.temperature_2m[i] * 1.8 + 32).toFixed(1)} °F`,
-      visibilityKilo: data.visibility[i] / 1000,
-      visibilityMile: (data.visibility[i] / 1000 / 1.609).toFixed(1),
+      visibilityKilo: `${data.visibility[i] / 1000} km`,
+      visibilityMile: `${(data.visibility[i] / 1000 / 1.609).toFixed(1)} mi`,
       originalWeatherCode: data.weathercode[i],
       weatherCode: iconSelector(data.weathercode[i], i),
       windDirection: data.winddirection_10m[i],
-      windSpeedKilo: data.windspeed_10m[i],
-      windSpeedMile: (data.windspeed_10m[i] / 1.609).toFixed(1),
-      snowDepthMeter: data.snow_depth[i],
-      snowDepthFeet: data.snow_depth[i],
+      windSpeedKilo: `${data.windspeed_10m[i]} km/h`,
+      windSpeedMile: `${(data.windspeed_10m[i] / 1.609).toFixed(1)} mi/h`,
+      snowDepthMeter: `${data.snow_depth[i]} m`,
+      snowDepthFeet: `${data.snow_depth[i]} ft`,
       feelsLikeCelcius: `${data.apparent_temperature[i]} °C`,
       feelsLikeFarenheit: `${(data.apparent_temperature[i] * 1.8 + 32).toFixed(
         1
       )} °F`,
-      precipitation: data.precipitation_probability[i],
-      cloudCover: data.cloudcover_low[i],
+      precipitation: `${data.precipitation_probability[i]} %`,
+      cloudCover: `${data.cloudcover_low[i]} %`,
     };
   });
   return hourly;
@@ -171,7 +173,6 @@ export const loadWeather = async function () {
   information.current = createCurrent(response.current_weather);
   information.hourly = createHourly(response.hourly);
   information.daily = createDaily(response.daily);
-  console.log(information.hourly);
 };
 
 ////////////////////////////////////////////////////////// Date Functions ////////////////////////////////////////////////////////////

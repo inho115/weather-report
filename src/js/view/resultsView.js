@@ -17,12 +17,6 @@ class ResultsView extends view {
     });
   }
 
-  addHandlerCurrentsWeather(handler) {
-    this._parentEl.addEventListener("click", function (e) {
-      handler();
-    });
-  }
-
   _generateMarkup() {
     const str = this._data
       .map((result) => searchView.render(result, false))

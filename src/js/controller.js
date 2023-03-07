@@ -42,19 +42,17 @@ const controlSelect = async function (id) {
     hourlyView.render(model.information.hourly.slice(17, 24));
 
     // 7. render daily
-
-    // 8. create controlPagination()
-
-    // 9. create paginationView(including _generateMarkup(), addHandlerClick()) and send it to paginationView.addHandlerClick(control pagination)
-
-    // once page is loaded, idealy should render based on user's location
-
-    // **** need to create function to find out closest hour to current time, to use for rendering hourly from that hour
-
-    // **** need to create box for error messages (for when couldnt find city by a input)
   } catch (err) {
     console.log(err);
   }
+
+  const controlHourly = function () {
+    // 8. create controlPagination()
+    // 9. create paginationView(including _generateMarkup(), addHandlerClick()) and send it to paginationView.addHandlerClick(control pagination)
+    // once page is loaded, idealy should render based on user's location
+    // **** need to create function to find out closest hour to current time, to use for rendering hourly from that hour
+    // **** need to create box for error messages (for when couldnt find city by a input)
+  };
 };
 
 const init = function () {
@@ -62,6 +60,7 @@ const init = function () {
   model.getDate();
   searchView.addHandlerSearch(controlCitySearch);
   resultsView.addHandlerSelect(controlSelect);
+  hourlyView.addHandlerExpand();
   // paginationView.addHandlerClick(control pagination) --> render next few hours on the hourly section, daily will be chart
 };
 init();

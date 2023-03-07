@@ -259,7 +259,7 @@
   justify-content: flex-end;
 }
 
-.icon-btn {
+.icon-expand-btn {
   border: none;
   outline: none;
   font-size: 2.4rem;
@@ -283,26 +283,15 @@
 .long-information {
   font-size: 2.4rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   width: 95%;
   background-color: #fff;
   justify-content: space-between;
   transition: all 0.5s;
-  margin-bottom: 0rem;
-  transition: all 0.5s;
 }
 
-.up {
+.hidden-info {
   opacity: 0;
-  margin-bottom: 0;
-}
-
-.slide {
-  transform: translateY(-70%);
-}
-
-@media (max-width: 87.5em) {
-  .grid-col--2 {
-    grid-template-columns: 1fr;
-  }
+  pointer-events: none;
+  visibility: hidden;
 }

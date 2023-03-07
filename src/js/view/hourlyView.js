@@ -8,13 +8,17 @@ class hourlyView extends view {
   _parentEl = document.querySelector(".section--hourly");
 
   _generateMarkup = function () {
-    const str = this._data.map((data) => this._generateInfo(data)).join("");
+    const str = this._data
+      .map((data, i) => this._generateInfo(data, i))
+      .join("");
     return str;
   };
 
-  _generateInfo = function (data) {
+  _generateInfo = function (data, index) {
     const markup = `
-      <div class="container container--hourly" data-container="1">
+      <div class="container container--hourly" data-container="${index}" data-translate="${
+      -70 * +index
+    }" style="transform:translateY(${-70 * +index}%)">
         <div class="short-information">
           <div class="icon-set">
             <p>${data.time}</p>
@@ -40,7 +44,7 @@ class hourlyView extends view {
             <p>${data.windSpeedKilo}</p>
           </div>
           <div class="expand-information icon-set">
-            <button class="icon-btn" data-id="1">
+            <button class="icon-expand-btn" data-id="${index}">
               <svg class="small-icon">
                 <title>Expand detailed information</title>
                 <use href="${icons}#icon-chevron-down"></use>
@@ -49,14 +53,7 @@ class hourlyView extends view {
           </div>
         </div>
 
-        <div class="long-information up" id="1">
-          <div class="icon-set">
-            <svg class="small-icon">
-              <title>Highest temperature</title>
-              <use href="${icons}#icon-max"></use>
-            </svg>
-            <p></p>
-          </div>
+        <div class="long-information hidden-info" id="${index}">
           <div class="icon-set">
             <svg class="small-icon">
               <title>Visibility</title>
@@ -76,14 +73,7 @@ class hourlyView extends view {
               <title>Snow depth</title>
               <use href="${icons}#icon-snowflake"></use>
             </svg>
-            <p>${data.snowDepth}</p>
-          </div>
-          <div class="icon-set" tooltip="minimum">
-            <svg class="small-icon">
-              <title>Lowest temperature</title>
-              <use href="${icons}#icon-min"></use>
-            </svg>
-            <p>-12 °C</p>
+            <p>${data.snowDepthMeter}</p>
           </div>
           <div class="icon-set">
             <svg class="small-icon">
@@ -104,7 +94,9 @@ class hourlyView extends view {
               <title>Wind direction</title>
               <use href="${icons}#icon-compass"></use>
             </svg>
-            <svg class="small-icon" style="transform: rotate(${data.windDirection}deg)">
+            <svg class="small-icon" style="transform: rotate(${
+              data.windDirection
+            }deg)">
               <use href="${icons}#icon-arrow-up"></use>
             </svg>
           </div>
@@ -113,117 +105,40 @@ class hourlyView extends view {
     `;
     return markup;
   };
+
+  addHandlerExpand() {
+    this._parentEl.addEventListener("click", function (e) {
+      const expandBtn = e.target.closest(".icon-expand-btn");
+      const id = expandBtn.dataset.id;
+      const detail = document.getElementById(`${id}`);
+      if (!expandBtn) return;
+      detail.classList.toggle("hidden-info");
+
+      if (!detail.classList.contains("hidden-info")) {
+        for (let i = id; i <= 6; i++) {
+          console.log(i);
+          let next = document.querySelector(`[data-container="${+i + 1}"]`);
+          if (next) {
+            next.style.transform = `translateY(${
+              +next.dataset.translate + 70
+            }%)`;
+            next.dataset.translate = `${+next.dataset.translate + 70}`;
+          }
+        }
+      } else {
+        for (let i = id; i <= 6; i++) {
+          console.log(i);
+          let next = document.querySelector(`[data-container="${+i + 1}"]`);
+          if (next) {
+            next.style.transform = `translateY(${
+              +next.dataset.translate - 70
+            }%)`;
+            next.dataset.translate = `${+next.dataset.translate - 70}`;
+          }
+        }
+      }
+    });
+  }
 }
 
 export default new hourlyView();
-
-{
-  /* <div class="container container--hourly slide" id="test" data-container="2">
-  <div class="short-information">
-    <div class="icon-set">
-      <p>12 PM</p>
-    </div>
-    <div class="icon-set">
-      <svg class="small-icon">
-        <title>Temperature / Feels like temperature</title>
-        <use href="${icons}#icon-thermometer-low"></use>
-      </svg>
-      <p>-1 °C / -10 °C</p>
-    </div>
-    <div class="icon-set">
-      <svg class="medium-icon">
-        <title>Partly Cloudy</title>
-        <use href="${icons}#icon-cloud-sun"></use>
-      </svg>
-    </div>
-    <div class="icon-set">
-      <svg class="small-icon">
-        <title>Wind speed</title>
-        <use href="${icons}#icon-wind"></use>
-      </svg>
-      <p>55 km/h</p>
-    </div>
-    <div class="expand-information icon-set">
-      <button class="icon-btn" data-id="2">
-        <svg class="small-icon">
-          <title>Expand detailed information</title>
-          <use href="url:src/img/icons.svg#icon-chevron-down"></use>
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <div class="long-information up" id="2">
-    <div class="icon-set">
-      <svg class="small-icon">
-        <title>Highest temperature</title>
-        <use href="url:src/img/icons.svg#icon-max"></use>
-      </svg>
-      <p>1 °C</p>
-    </div>
-    <div class="icon-set">
-      <svg class="small-icon">
-        <title>Visibility</title>
-        <use href="url:src/img/icons.svg#icon-eye"></use>
-      </svg>
-      <p>24 km</p>
-    </div>
-    <div class="icon-set">
-      <svg class="small-icon">
-        <title>Humidity</title>
-        <use href="url:src/img/icons.svg#icon-droplet"></use>
-      </svg>
-      <p>85 %</p>
-    </div>
-    <div class="icon-set">
-      <svg class="small-icon">
-        <title>Snow depth</title>
-        <use href="url:src/img/icons.svg#icon-snowflake"></use>
-      </svg>
-      <p>0.5 meters</p>
-    </div>
-    <div class="icon-set" tooltip="minimum">
-      <svg class="small-icon">
-        <title>Lowest temperature</title>
-        <use href="url:src/img/icons.svg#icon-min"></use>
-      </svg>
-      <p>-12 °C</p>
-    </div>
-    <div class="icon-set">
-      <svg class="small-icon">
-        <title>Cloud cover</title>
-        <use href="url:src/img/icons.svg#icon-clouds"></use>
-      </svg>
-      <p>100 %</p>
-    </div>
-    <div class="icon-set">
-      <svg class="small-icon">
-        <title>Precipitation probability</title>
-        <use href="url:src/img/icons.svg#icon-cloud-rain"></use>
-      </svg>
-      <p>0 %</p>
-    </div>
-    <div class="icon-set">
-      <svg class="medium-icon">
-        <title>Wind direction</title>
-        <use href="url:src/img/icons.svg#icon-compass"></use>
-      </svg>
-      <svg class="small-icon" style="transform: rotate(145deg)">
-        <use href="url:src/img/icons.svg#icon-arrow-up"></use>
-      </svg>
-    </div>
-  </div>
-</div>; */
-}
-
-// hourly.addEventListener("click", function (e) {
-//   const btn = e.target.closest(".icon-btn");
-//   if (!btn) return;
-//   const id = btn.dataset.id;
-//   const detail = document.getElementById(`${+id}`);
-//   detail.classList.toggle("up");
-//   console.log(`${+id + 1}`);
-//   const next = document.querySelector(`[data-container="${+id + 1}"]`);
-//   if (!next) return;
-//   next.classList.toggle("slide");
-// });
