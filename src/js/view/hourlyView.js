@@ -15,10 +15,9 @@ class hourlyView extends view {
   };
 
   _generateInfo = function (data, index) {
+    document.querySelector(".heading-secondary").innerHTML = "Hourly Weather";
     const markup = `
-      <div class="container container--hourly" data-container="${index}" data-translate="${
-      -60 * +index
-    }" style="transform:translateY(${-60 * +index}%)">
+      <div class="container container--hourly" data-container="${index}" >
         <div class="short-information">
           <div class="icon-set">
             <p>${data.time}</p>
@@ -93,9 +92,7 @@ class hourlyView extends view {
               <title>Wind direction</title>
               <use href="${icons}#icon-compass"></use>
             </svg>
-            <svg class="small-icon" style="transform: rotate(${
-              data.windDirection
-            }deg)">
+            <svg class="small-icon" style="transform: rotate(${data.windDirection}deg)">
               <use href="${icons}#icon-arrow-up"></use>
             </svg>
           </div>
@@ -119,29 +116,17 @@ class hourlyView extends view {
 
       detail.classList.toggle("hidden-info");
 
-      if (!detail.classList.contains("hidden-info")) {
-        for (let i = id; i <= 6; i++) {
-          let next = document.querySelector(`[data-container="${+i + 1}"]`);
-          if (next) {
-            next.style.transform = `translateY(${
-              +next.dataset.translate + 60
-            }%)`;
-            next.dataset.translate = `${+next.dataset.translate + 60}`;
-          }
-        }
-      } else {
-        for (let i = id; i <= 6; i++) {
-          let next = document.querySelector(`[data-container="${+i + 1}"]`);
-          if (next) {
-            next.style.transform = `translateY(${
-              +next.dataset.translate - 60
-            }%)`;
-            next.dataset.translate = `${+next.dataset.translate - 60}`;
-          }
-        }
-      }
+      detail.classList.contains("hidden-info")
+        ? (detail.style.height = "0")
+        : (detail.style.height = "100%");
+      const num = document.querySelectorAll(".rotated").length;
+      console.log(num);
     });
   }
 }
 
 export default new hourlyView();
+
+// data-translate="${
+//       -60 * +index
+//     }" style="transform:translateY(${-60 * +index}%)"
