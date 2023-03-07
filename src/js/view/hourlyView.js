@@ -52,7 +52,6 @@ class hourlyView extends view {
             </button>
           </div>
         </div>
-
         <div class="long-information hidden-info" id="${index}">
           <div class="icon-set">
             <svg class="small-icon">
