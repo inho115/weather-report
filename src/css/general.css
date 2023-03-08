@@ -112,3 +112,17 @@ body {
 .rotated {
   rotate: 180deg;
 }
+
+.small-icon {
+  display: block;
+  width: 3.2em;
+  height: 3.2em;
+  padding: 0 2.4rem 0 2.4rem;
+}
+
+.medium-icon {
+  display: block;
+  width: 3.6em;
+  height: 3.6em;
+  padding: 0 2.4rem 0 2.4rem;
+}

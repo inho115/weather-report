@@ -54,6 +54,7 @@ export const information = {
       windSpeedMile: "",
     },
   ],
+  currentPage: [0, 7],
 };
 
 const createCity = function (data) {
@@ -88,7 +89,7 @@ const createCurrent = function (data) {
 const createHourly = function (data) {
   const hourly = data.relativehumidity_2m.map((info, i) => {
     return {
-      time: `${zeroInserter(i)}:00`,
+      time: `${zeroInserter(i > 24 ? i % 25 : i)}:00`,
       humidity: `${data.relativehumidity_2m[i]} %`,
       celsius: `${data.temperature_2m[i]} °C`,
       farenheit: `${(data.temperature_2m[i] * 1.8 + 32).toFixed(1)} °F`,
@@ -173,6 +174,18 @@ export const loadWeather = async function () {
   information.current = createCurrent(response.current_weather);
   information.hourly = createHourly(response.hourly);
   information.daily = createDaily(response.daily);
+};
+
+export const changePage = function (direction) {
+  if (direction === "right" && information.currentPage[1] != 168) {
+    information.currentPage[0] += 7;
+    information.currentPage[1] += 7;
+  }
+
+  if (direction === "left" && information.currentPage[0] != 0) {
+    information.currentPage[0] -= 7;
+    information.currentPage[1] -= 7;
+  }
 };
 
 ////////////////////////////////////////////////////////// Date Functions ////////////////////////////////////////////////////////////

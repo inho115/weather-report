@@ -7,14 +7,37 @@ import { async } from "regenerator-runtime";
 class hourlyView extends view {
   _parentEl = document.querySelector(".hourly");
 
-  _generateMarkup = function () {
+  _generateMarkup() {
+    const left = `
+    <div class="pagination">
+      <button class="pagination-btn" data-arrow="left">
+        <svg class="pagination-icon">
+          <title>last page</title>
+          <use href="${icons}#icon-arrow-left"></use>
+        </svg>
+      </button>
+    </div>
+    `;
+
+    const right = `
+    <div class="pagination">
+      <button class="pagination-btn" data-arrow="right">
+        <svg class="pagination-icon">
+          <title>next page</title>
+          <use href="${icons}#icon-arrow-right"></use>
+        </svg>
+      </button>
+    </div>
+    `;
+
     const str = this._data
       .map((data, i) => this._generateInfo(data, i))
       .join("");
-    return str;
-  };
+    return left + '<div class="hourly-view"> ' + str + "</div>" + right;
+  }
 
-  _generateInfo = function (data, index) {
+  _generateInfo(data, index) {
+    console.log(index);
     document.querySelector(".heading-secondary").innerHTML = "Hourly Weather";
     const markup = `
       <div class="container container--hourly" data-container="${index}" >
@@ -23,15 +46,12 @@ class hourlyView extends view {
             <p>${data.time}</p>
           </div>
           <div class="icon-set">
-            <svg class="small-icon">
-              <title>Temperature / Feels like temperature</title>
-              <use href="${icons}#${data.weatherCode}"></use>
-            </svg>
+      
             <p>${data.celsius} / ${data.feelsLikeCelcius} (feels like)</p>
           </div>
           <div class="icon-set">
             <svg class="medium-icon">
-              <title>Partly Cloudy</title>
+              <title>Current Weather</title>
               <use href="${icons}#${data.weatherCode}"></use>
             </svg>
           </div>
@@ -100,7 +120,7 @@ class hourlyView extends view {
       </div>
     `;
     return markup;
-  };
+  }
 
   addHandlerExpand() {
     this._parentEl.addEventListener("click", function (e) {
@@ -119,14 +139,17 @@ class hourlyView extends view {
       detail.classList.contains("hidden-info")
         ? (detail.style.height = "0")
         : (detail.style.height = "100%");
-      const num = document.querySelectorAll(".rotated").length;
-      console.log(num);
+    });
+  }
+
+  addHandlerPagination(handler) {
+    this._parentEl.addEventListener("click", function (e) {
+      const pagination = e.target.closest(".pagination-btn");
+      if (!pagination) return;
+      const direction = pagination.dataset.arrow;
+      handler(direction);
     });
   }
 }
 
 export default new hourlyView();
-
-// data-translate="${
-//       -60 * +index
-//     }" style="transform:translateY(${-60 * +index}%)"
