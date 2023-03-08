@@ -116,18 +116,28 @@ const createHourly = function (data) {
 const createDaily = function (data) {
   const daily = data.rain_sum.map((info, i) => {
     return {
-      rainSum: data.rain_sum[i],
-      snowfallSum: data.snowfall_sum[i],
-      sunrise: data.sunrise[i].slice(11, data.sunrise[i].length),
-      sunset: data.sunset[i].slice(11, data.sunset[i].length),
-      temperatureMax: data.temperature_2m_max[i],
-      temperatureMin: data.temperature_2m_min[i],
-      uvMax: data.uv_index_max[i],
+      rainSum: `${data.rain_sum[i]} mm`,
+      snowfallSum: `${data.snowfall_sum[i]} cm`,
+      sunrise: `${data.sunrise[i].slice(11, data.sunrise[i].length)} AM`,
+      sunset: `${data.sunset[i].slice(11, data.sunset[i].length)} PM`,
+      temperatureMaxCelsius: `${data.temperature_2m_max[i]} °C`,
+      temperatureMaxFarenheit: `${(
+        data.temperature_2m_max[i] * 1.8 +
+        32
+      ).toFixed(1)} °F`,
+      temperatureMin: `${data.temperature_2m_min[i]} °C`,
+      temperatureMinFarenheit: `${(
+        data.temperature_2m_min[i] * 1.8 +
+        32
+      ).toFixed(1)} °F`,
+      uvMax: `${data.uv_index_max[i]} / 11`,
       originalWeatherCode: data.weathercode[i],
       weatherCode: iconSelector(data.weathercode[i]),
       windDirection: data.winddirection_10m_dominant[i],
-      windSpeedKilo: data.windspeed_10m_max[i],
-      windSpeedMile: Math.round(+data.windspeed_10m_max[i] / 1.609).toFixed(1),
+      windSpeedKilo: `${data.windspeed_10m_max[i]} km/h`,
+      windSpeedMile: `${Math.round(+data.windspeed_10m_max[i] / 1.609).toFixed(
+        1
+      )} mi/h`,
     };
   });
   return daily;
@@ -174,6 +184,7 @@ export const loadWeather = async function () {
   information.current = createCurrent(response.current_weather);
   information.hourly = createHourly(response.hourly);
   information.daily = createDaily(response.daily);
+  console.log(information.daily);
 };
 
 export const changePage = function (direction) {

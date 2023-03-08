@@ -69,14 +69,50 @@
       </section>
     </div>
 
-    <section class="section--hourly">
+    <section class="section--hourly none">
       <h2 class="heading-secondary"></h2>
-      <div class="hourly"></div>
+      <div class="hourly">
+        <div class="pagination">
+          <button class="pagination-btn" data-arrow="left">
+            <svg class="pagination-icon">
+              <title>last page</title>
+              <use href="src/img/icons.svg#icon-arrow-left"></use>
+            </svg>
+          </button>
+        </div>
+        <div class="hourly-view"></div>
+        <div class="pagination">
+          <button class="pagination-btn" data-arrow="right">
+            <svg class="pagination-icon">
+              <title>next page</title>
+              <use href="src/img/icons.svg#icon-arrow-right"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
     </section>
 
-    <section class="section--daily">
+    <section class="section--daily none">
       <h2 class="heading-secondary"></h2>
-      <div class="daily"></div>
+      <div class="daily">
+        <div class="pagination">
+          <button class="pagination-btn" data-arrow="left">
+            <svg class="pagination-icon">
+              <title>last page</title>
+              <use href="src/img/icons.svg#icon-arrow-left"></use>
+            </svg>
+          </button>
+        </div>
+        <div class="daily-cards" data-move="10"></div>
+        <div class="pagination">
+          <button class="pagination-btn" data-arrow="left">
+            <svg class="pagination-icon">
+              <title>last page</title>
+              <use href="src/img/icons.svg#icon-arrow-left"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
     </section>
   </body>
 </html>

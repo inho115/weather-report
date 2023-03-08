@@ -5,39 +5,17 @@ import icons from "url:../../img/icons.svg";
 import { async } from "regenerator-runtime";
 
 class hourlyView extends view {
-  _parentEl = document.querySelector(".hourly");
+  _parentEl = document.querySelector(".hourly-view");
+  _hourly = document.querySelector(".hourly");
 
   _generateMarkup() {
-    const left = `
-    <div class="pagination">
-      <button class="pagination-btn" data-arrow="left">
-        <svg class="pagination-icon">
-          <title>last page</title>
-          <use href="${icons}#icon-arrow-left"></use>
-        </svg>
-      </button>
-    </div>
-    `;
-
-    const right = `
-    <div class="pagination">
-      <button class="pagination-btn" data-arrow="right">
-        <svg class="pagination-icon">
-          <title>next page</title>
-          <use href="${icons}#icon-arrow-right"></use>
-        </svg>
-      </button>
-    </div>
-    `;
-
-    const str = this._data
+    const markup = this._data
       .map((data, i) => this._generateInfo(data, i))
       .join("");
-    return left + '<div class="hourly-view"> ' + str + "</div>" + right;
+    return markup;
   }
 
   _generateInfo(data, index) {
-    console.log(index);
     document.querySelector(".heading-secondary").innerHTML = "Hourly Weather";
     const markup = `
       <div class="container container--hourly" data-container="${index}" >
@@ -123,7 +101,7 @@ class hourlyView extends view {
   }
 
   addHandlerExpand() {
-    this._parentEl.addEventListener("click", function (e) {
+    this._hourly.addEventListener("click", function (e) {
       const expandBtn = e.target.closest(".icon-expand-btn");
       if (!expandBtn) return;
       const id = expandBtn.dataset.id;
@@ -143,7 +121,7 @@ class hourlyView extends view {
   }
 
   addHandlerPagination(handler) {
-    this._parentEl.addEventListener("click", function (e) {
+    this._hourly.addEventListener("click", function (e) {
       const pagination = e.target.closest(".pagination-btn");
       if (!pagination) return;
       const direction = pagination.dataset.arrow;

@@ -3,6 +3,10 @@
     font-size: 20%;
   }
 
+  .intro {
+    height: 100%;
+  }
+
   .summary {
     display: grid;
     grid-template-columns: 1fr;

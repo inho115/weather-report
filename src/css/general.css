@@ -126,3 +126,7 @@ body {
   height: 3.6em;
   padding: 0 2.4rem 0 2.4rem;
 }
+
+.none {
+  display: none;
+}
