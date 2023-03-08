@@ -47,7 +47,7 @@ class hourlyView extends view {
           </div>
           <div class="icon-set">
       
-            <p>${data.celsius} / ${data.feelsLikeCelcius} (feels like)</p>
+            <p>${data.celsius} / ${data.feelsLikeCelcius}</p>
           </div>
           <div class="icon-set">
             <svg class="medium-icon">
@@ -56,7 +56,7 @@ class hourlyView extends view {
             </svg>
           </div>
           <div class="icon-set">
-            <svg class="small-icon">
+            <svg class="medium-icon">
               <title>Wind speed</title>
               <use href="${icons}#icon-wind"></use>
             </svg>

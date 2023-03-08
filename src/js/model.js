@@ -96,7 +96,7 @@ const createHourly = function (data) {
       visibilityKilo: `${data.visibility[i] / 1000} km`,
       visibilityMile: `${(data.visibility[i] / 1000 / 1.609).toFixed(1)} mi`,
       originalWeatherCode: data.weathercode[i],
-      weatherCode: iconSelector(data.weathercode[i], i),
+      weatherCode: iconSelector(data.weathercode[i], i > 24 ? i % 25 : i),
       windDirection: data.winddirection_10m[i],
       windSpeedKilo: `${data.windspeed_10m[i]} km/h`,
       windSpeedMile: `${(data.windspeed_10m[i] / 1.609).toFixed(1)} mi/h`,
@@ -247,9 +247,9 @@ const iconSelector = function (code, time = 0) {
   const iconCloudLightning = [95, 96, 99];
 
   if (code === 0) {
-    return +time < 18 ? "icon-sunny" : "icon-moon-stars";
+    return time > 4 && time < 18 ? "icon-sunny" : "icon-moon-stars";
   } else if (iconCloudSun.some((weatherCode) => weatherCode === code)) {
-    return +time < 18 ? "icon-cloud-sun" : "icon-cloud-moon";
+    return time > 4 && time < 18 ? "icon-cloud-sun" : "icon-cloud-moon";
   } else if (iconCloudFog.some((weatherCode) => weatherCode === code)) {
     return "icon-cloud-fog";
   } else if (iconRain.some((weatherCode) => weatherCode === code)) {

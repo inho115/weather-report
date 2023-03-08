@@ -200,6 +200,7 @@
   font-weight: 800;
   font-size: 3.6rem;
   padding: 2.4rem;
+  text-align: center;
 }
 
 .summary-card {
@@ -218,6 +219,7 @@
   background-color: #fff;
   border-radius: 20px;
   min-height: 50rem;
+  justify-self: center;
 }
 
 #map {
@@ -329,5 +331,5 @@
 /******************************* SECTION DAILY *******************************************/
 .section--daily {
   padding: 9.6rem;
-  background-color: black;
+  background-color: rgba(73, 140, 138, 0.993);
 }
