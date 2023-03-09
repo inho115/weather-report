@@ -3,6 +3,10 @@
 /********************************/
 
 @media (max-width: 90em) {
+  body {
+    overflow-x: hidden;
+  }
+
   .section--hourly {
     padding: 4.8rem;
   }
