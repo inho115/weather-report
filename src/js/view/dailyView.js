@@ -20,8 +20,8 @@ class dailyView extends view {
     document.querySelector(".daily-title").innerHTML = "Daily Weather";
     const markup = `
     <div class="daily-card container" ${
-      width < 950 ? `style="transform:translateX(${index * 100 - 41}%)` : ""
-    }" data-pos="${index * 100 - 41}">
+      width < 950 ? `style="transform:translateX(${index * 100}%)` : ""
+    }" data-pos="${index * 100}">
       <p class="daily-text">${data.date}</p>
       <div class="icon-set icon-box">
         <svg class="small-icon">
@@ -95,7 +95,7 @@ class dailyView extends view {
       const direction = btn.dataset.arrow;
       let position = document.querySelector(".daily-view").dataset.move;
       const sliders = document.querySelectorAll(".daily-card");
-      if (direction === "left" && sliders[0].dataset.pos != -41) {
+      if (direction === "left" && sliders[0].dataset.pos != 0) {
         document.querySelector(
           ".container--grid"
         ).style.transform = `translateX(${+position + 100})%`;
@@ -104,7 +104,7 @@ class dailyView extends view {
           slider.dataset.pos = +slider.dataset.pos + 100;
         });
       }
-      if (direction === "right" && sliders[6].dataset.pos != -41) {
+      if (direction === "right" && sliders[6].dataset.pos != 0) {
         document.querySelector(
           ".container--grid"
         ).style.transform = `translateX(${+position - 100})%`;

@@ -4,7 +4,7 @@
       rgba(73, 140, 138, 0.35),
       rgba(73, 140, 138, 0.993)
     ),
-    url("../img/cloud.jpg");
+    url("../img/cloud.webp");
 }
 
 /******************************* HEADER / NAVIGATION / LOGO *******************************************/
@@ -205,7 +205,7 @@
       rgba(73, 140, 138, 0.35),
       rgba(73, 140, 138, 0.993)
     ),
-    url("../img/city.jpg");
+    url("../img/city.webp");
   min-height: 50rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -409,4 +409,61 @@
 
 .hide-btn {
   display: none;
+}
+
+/******************************* FOOTER *******************************************/
+
+.footer {
+  background-color: #006073e8;
+  padding: 4.8rem 9.6rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2.4rem;
+  font-weight: 600;
+  row-gap: 5rem;
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 10rem;
+  width: 40%;
+}
+
+.footer-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.contributers {
+  font-weight: 700;
+}
+
+.footer-link:link,
+.footer-link:visited {
+  text-decoration: none;
+  color: #e67e22;
+}
+
+.footer-link:hover,
+.footer-link:active {
+  color: #f5a966;
+}
+
+.footer-button {
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.4s;
+}
+
+.footer-button:hover {
+  transform: translateY(-20%);
+}
+
+.footer-button:focus {
+  box-shadow: none;
+  border: none;
 }
