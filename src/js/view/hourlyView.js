@@ -16,7 +16,7 @@ class hourlyView extends view {
   }
 
   _generateInfo(data, index) {
-    document.querySelector(".heading-secondary").innerHTML = "Hourly Weather";
+    document.querySelector(".hourly-title").innerHTML = "Hourly Weather";
     const markup = `
       <div class="container container--hourly" data-container="${index}" >
         <div class="short-information">
@@ -29,7 +29,7 @@ class hourlyView extends view {
           </div>
           <div class="icon-set">
             <svg class="medium-icon">
-              <title>Current Weather</title>
+              <title>${data.weatherStatus}</title>
               <use href="${icons}#${data.weatherCode}"></use>
             </svg>
           </div>

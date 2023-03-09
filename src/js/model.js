@@ -27,6 +27,7 @@ export const information = {
       visibilityMile: "",
       originalWeatherCode: "",
       weatherCode: "",
+      weatherStatus: "",
       windDirection: "",
       windSpeedKilo: "",
       windSpeedMile: "",
@@ -40,6 +41,7 @@ export const information = {
   ],
   daily: [
     {
+      date: "",
       rainSum: "",
       snowfallSum: "",
       sunrise: "",
@@ -49,6 +51,7 @@ export const information = {
       uvMax: "",
       originalWeatherCode: "",
       weatherCode: "",
+      weatherStatus: "",
       windDirection: "",
       windSpeedKilo: "",
       windSpeedMile: "",
@@ -97,6 +100,9 @@ const createHourly = function (data) {
       visibilityMile: `${(data.visibility[i] / 1000 / 1.609).toFixed(1)} mi`,
       originalWeatherCode: data.weathercode[i],
       weatherCode: iconSelector(data.weathercode[i], i > 24 ? i % 25 : i),
+      weatherStatus: currentStatus(
+        iconSelector(data.weathercode[i], i > 24 ? i % 25 : i)
+      ),
       windDirection: data.winddirection_10m[i],
       windSpeedKilo: `${data.windspeed_10m[i]} km/h`,
       windSpeedMile: `${(data.windspeed_10m[i] / 1.609).toFixed(1)} mi/h`,
@@ -116,6 +122,12 @@ const createHourly = function (data) {
 const createDaily = function (data) {
   const daily = data.rain_sum.map((info, i) => {
     return {
+      date:
+        +information.date.todayString.slice(5, 6) + i >= 10
+          ? information.date.todayString.slice(0, 4) +
+            `${+information.date.todayString.slice(5, 6) + i}`
+          : information.date.todayString.slice(0, 5) +
+            `${+information.date.todayString.slice(5, 6) + i}`,
       rainSum: `${data.rain_sum[i]} mm`,
       snowfallSum: `${data.snowfall_sum[i]} cm`,
       sunrise: `${data.sunrise[i].slice(11, data.sunrise[i].length)} AM`,
@@ -125,14 +137,15 @@ const createDaily = function (data) {
         data.temperature_2m_max[i] * 1.8 +
         32
       ).toFixed(1)} °F`,
-      temperatureMin: `${data.temperature_2m_min[i]} °C`,
+      temperatureMinCelsius: `${data.temperature_2m_min[i]} °C`,
       temperatureMinFarenheit: `${(
         data.temperature_2m_min[i] * 1.8 +
         32
       ).toFixed(1)} °F`,
-      uvMax: `${data.uv_index_max[i]} / 11`,
+      uvMax: `${data.uv_index_max[i]}`,
       originalWeatherCode: data.weathercode[i],
       weatherCode: iconSelector(data.weathercode[i]),
+      weatherStatus: currentStatus(iconSelector(data.weathercode[i])),
       windDirection: data.winddirection_10m_dominant[i],
       windSpeedKilo: `${data.windspeed_10m_max[i]} km/h`,
       windSpeedMile: `${Math.round(+data.windspeed_10m_max[i] / 1.609).toFixed(
@@ -162,6 +175,7 @@ export const loadMap = async function () {
     attribution:
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
+  map.scrollWheelZoom.disable();
 };
 
 export const changeMap = async function () {
@@ -183,8 +197,8 @@ export const loadWeather = async function () {
 
   information.current = createCurrent(response.current_weather);
   information.hourly = createHourly(response.hourly);
+  console.log(information.hourly);
   information.daily = createDaily(response.daily);
-  console.log(information.daily);
 };
 
 export const changePage = function (direction) {
@@ -275,5 +289,28 @@ const iconSelector = function (code, time = 0) {
     return "icon-snow-alot";
   } else if (iconCloudLightning.some((weatherCode) => weatherCode === code)) {
     return "icon-cloud-lightning";
+  }
+};
+
+const currentStatus = function (weatherCode) {
+  switch (weatherCode) {
+    case "icon-sunny":
+      return "Clear sky";
+    case "icon-moon-stars":
+      return "Clear sky";
+    case "icon-cloud-sun":
+      return "Cloudy";
+    case "icon-cloud-moon":
+      return "Cloudy";
+    case "icon-rain":
+      return "Slightly raining";
+    case "icon-rain-violent":
+      return "Rainy day";
+    case "icon-snow":
+      return "Slightly snowing";
+    case "icon-snow-alot":
+      return "Snowing";
+    case "icon-cloud-lightning":
+      return "Thunderstorm";
   }
 };

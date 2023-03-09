@@ -7,6 +7,7 @@ import searchView from "./view/searchView.js";
 import summaryView from "./view/summaryView.js";
 import timeView from "./view/timeView.js";
 import hourlyView from "./view/hourlyView.js";
+import dailyView from "./view/dailyView.js";
 
 const controlCitySearch = async function () {
   try {
@@ -42,6 +43,7 @@ const controlSelect = async function (id) {
     hourlyView.render(model.information.hourly.slice(0, 7));
 
     // 7. render daily
+    dailyView.render(model.information.daily);
   } catch (err) {
     console.log(err);
   }
@@ -69,6 +71,7 @@ const init = function () {
   resultsView.addHandlerSelect(controlSelect);
   hourlyView.addHandlerExpand();
   hourlyView.addHandlerPagination(controlPagination);
+  dailyView.addHanlderPagination();
   // paginationView.addHandlerClick(control pagination) --> render next few hours on the hourly section, daily will be chart
 };
 init();

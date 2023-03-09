@@ -77,7 +77,7 @@ body {
 }
 
 .container {
-  max-width: 180rem;
+  max-width: 140rem;
   margin: 0 auto;
 }
 
@@ -93,11 +93,6 @@ body {
   margin-bottom: 4.8rem;
 }
 
-.grid-col--2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
 .small {
   font-size: 2.4rem;
 }
@@ -105,8 +100,8 @@ body {
 .heading-secondary {
   font-size: 3.6rem;
   text-align: center;
-  color: #e67e22;
-  margin-bottom: 9.6rem;
+  color: #fd7e14;
+  margin-bottom: 4.8rem;
 }
 
 .rotated {

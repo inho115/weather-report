@@ -59,7 +59,7 @@
           <div class="information">
             <div class="currentTime"></div>
             <div class="summary">
-              <div class="summary-text-box grid-col--2"></div>
+              <div class="summary-text-box"></div>
               <div class="map-container">
                 <div id="map"></div>
               </div>
@@ -70,7 +70,7 @@
     </div>
 
     <section class="section--hourly none">
-      <h2 class="heading-secondary"></h2>
+      <h2 class="heading-secondary hourly-title"></h2>
       <div class="hourly">
         <div class="pagination">
           <button class="pagination-btn" data-arrow="left">
@@ -93,9 +93,9 @@
     </section>
 
     <section class="section--daily none">
-      <h2 class="heading-secondary"></h2>
+      <h2 class="heading-secondary daily-title"></h2>
       <div class="daily">
-        <div class="pagination">
+        <div class="pagination hide-btn left">
           <button class="pagination-btn" data-arrow="left">
             <svg class="pagination-icon">
               <title>last page</title>
@@ -103,12 +103,12 @@
             </svg>
           </button>
         </div>
-        <div class="daily-cards" data-move="10"></div>
-        <div class="pagination">
-          <button class="pagination-btn" data-arrow="left">
+        <div class="daily-view container--grid" data-move="0"></div>
+        <div class="pagination hide-btn right">
+          <button class="pagination-btn" data-arrow="right">
             <svg class="pagination-icon">
               <title>last page</title>
-              <use href="src/img/icons.svg#icon-arrow-left"></use>
+              <use href="src/img/icons.svg#icon-arrow-right"></use>
             </svg>
           </button>
         </div>

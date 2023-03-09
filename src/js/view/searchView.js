@@ -25,7 +25,7 @@ class SearchView extends view {
       e.preventDefault();
       resultsView._parentEl.classList.remove("hidden");
       document.querySelector(".section--hourly").classList.remove("none");
-      // dailyView._parentEl.classList.remove("none");
+      document.querySelector(".section--daily").classList.remove("none");
       container.classList.add("slide-up");
       handler();
     });
