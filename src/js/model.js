@@ -167,7 +167,10 @@ export const loadCitySearchResults = async function (query) {
 };
 
 export const loadMap = async function () {
-  var map = L.map("map").setView([43.65107, -79.347015], 6);
+  var map = L.map("map", { tap: false, dragging: false }).setView(
+    [43.65107, -79.347015],
+    6
+  );
   information.map = map;
 
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -175,7 +178,7 @@ export const loadMap = async function () {
     attribution:
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
-  map.scrollWheelZoom.disable();
+  information.map.scrollWheelZoom.disable();
 };
 
 export const changeMap = async function () {
