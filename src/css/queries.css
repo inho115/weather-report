@@ -113,12 +113,10 @@
 
   .right {
     transform: translate(50%, 50%);
-    z-index: 9999;
   }
 
   .left {
     transform: translate(-50%, 50%);
-    z-index: 9999;
   }
 }
 
@@ -128,11 +126,19 @@
   }
 
   .section--daily {
-    padding: 0rem;
+    padding: 2.4rem;
   }
 
   .summary-text-box {
     grid-template-columns: 1fr;
+  }
+
+  .right {
+    transform: translate(0%, 50%);
+  }
+
+  .left {
+    transform: translate(0%, 50%);
   }
 }
 
