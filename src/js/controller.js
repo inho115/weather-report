@@ -47,10 +47,6 @@ const controlSelect = async function (id) {
   } catch (err) {
     console.log(err);
   }
-
-  // once page is loaded, idealy should render based on user's location
-  // **** need to create function to find out closest hour to current time, to use for rendering hourly from that hour
-  // **** need to create box for error messages (for when couldnt find city by a input)
 };
 
 const controlPagination = function (direction) {
@@ -64,17 +60,31 @@ const controlPagination = function (direction) {
   );
 };
 
+const obs = new IntersectionObserver(
+  function (entries) {
+    const ent = entries[0];
+    if (ent.isIntersecting === false) {
+      document.body.classList.add("sticky");
+    }
+    if (ent.isIntersecting === true) {
+      document.body.classList.remove("sticky");
+    }
+  },
+  {
+    root: null,
+    threshold: 0,
+    rootMargin: "-150px",
+  }
+);
+
 const init = function () {
   model.loadMap();
   model.getDate();
+  searchView.observer(obs);
   searchView.addHandlerSearch(controlCitySearch);
   resultsView.addHandlerSelect(controlSelect);
   hourlyView.addHandlerExpand();
   hourlyView.addHandlerPagination(controlPagination);
   dailyView.addHanlderPagination();
-  // paginationView.addHandlerClick(control pagination) --> render next few hours on the hourly section, daily will be chart
 };
 init();
-
-// change ID into URL
-// window.history.pushState(null, '', `#${model.state.recipe.id}`);

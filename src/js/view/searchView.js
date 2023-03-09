@@ -1,7 +1,5 @@
 import view from "./view.js";
 import resultsView from "./resultsView.js";
-import summaryView from "./summaryView";
-import hourlyView from "./hourlyView.js";
 
 class SearchView extends view {
   _parentEl = document.querySelector(".search-form");
@@ -61,6 +59,10 @@ class SearchView extends view {
 
     return markup;
   };
+
+  observer(handler) {
+    handler.observe(document.querySelector(".intro"));
+  }
 }
 
 export default new SearchView();

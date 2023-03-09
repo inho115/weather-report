@@ -17,7 +17,6 @@ class dailyView extends view {
 
   _generateInfo(data, index) {
     const width = window.innerWidth;
-    console.log(width);
     document.querySelector(".daily-title").innerHTML = "Daily Weather";
     const markup = `
     <div class="daily-card container" ${
@@ -96,8 +95,6 @@ class dailyView extends view {
       const direction = btn.dataset.arrow;
       let position = document.querySelector(".daily-view").dataset.move;
       const sliders = document.querySelectorAll(".daily-card");
-      console.log(sliders[0].dataset.pos);
-      console.log(sliders[6].dataset.pos);
       if (direction === "left" && sliders[0].dataset.pos != -41) {
         document.querySelector(
           ".container--grid"

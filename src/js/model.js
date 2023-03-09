@@ -200,7 +200,6 @@ export const loadWeather = async function () {
 
   information.current = createCurrent(response.current_weather);
   information.hourly = createHourly(response.hourly);
-  console.log(information.hourly);
   information.daily = createDaily(response.daily);
 };
 
