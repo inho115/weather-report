@@ -144,6 +144,10 @@
   .hourly--left {
     transform: translateX(10%);
   }
+
+  .search-result {
+    width: 60%;
+  }
 }
 
 @media (max-width: 34em) {
