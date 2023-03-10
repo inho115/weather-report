@@ -7,7 +7,7 @@ class SearchView extends view {
   _container = document.querySelector(".information");
 
   _getQuery() {
-    const query = this._input.value;
+    const query = this._input.value.trim();
     this._clearInput();
     return query;
   }
@@ -29,29 +29,45 @@ class SearchView extends view {
     });
   }
 
-  _generateMarkup = function () {
+  _generateMarkup = function (index) {
     let markup;
     if (this._data.city && this._data.state && this._data.country) {
       markup = `
-      <button data-id=${this._data.id} class="search-result">
+      <button data-id=${
+        this._data.id
+      } class="search-result" style="transform:translateY(${
+        150 * this._data.index
+      }%)">
         <p>${this._data.city}, ${this._data.state}, ${this._data.country}</p>
       </button>
     `;
     } else if (this._data.city && this._data.state && !this._data.country) {
       markup = `
-      <button data-id=${this._data.id} class="search-result">
+      <button data-id=${
+        this._data.id
+      } class="search-result" style="transform:translateY(${
+        150 * this._data.index
+      }%)">
         <p>${this._data.city}, ${this._data.state}</p>
       </button>
     `;
     } else if (this._data.city && !this._data.state && !this._data.country) {
       markup = `
-      <button data-id=${this._data.id} class="search-result">
+      <button data-id=${
+        this._data.id
+      } class="search-result" style="transform:translateY(${
+        150 * this._data.index
+      }%)">
         <p>${this._data.city}</p>
       </button>
     `;
-    } else if (this._data.city && this._data.state && this._data.country) {
+    } else if (this._data.city && !this._data.state && this._data.country) {
       markup = `
-      <button data-id=${this._data.id} class="search-result">
+      <button data-id=${
+        this._data.id
+      } class="search-result" style="transform:translateY(${
+        150 * this._data.index
+      }%)">
         <p>${this._data.city}, ${this._data.country}</p>
       </button>
     `;

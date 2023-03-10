@@ -95,24 +95,54 @@ class dailyView extends view {
       const direction = btn.dataset.arrow;
       let position = document.querySelector(".daily-view").dataset.move;
       const sliders = document.querySelectorAll(".daily-card");
-      if (direction === "left" && sliders[0].dataset.pos != 0) {
-        document.querySelector(
-          ".container--grid"
-        ).style.transform = `translateX(${+position + 100})%`;
-        sliders.forEach((slider, i) => {
-          slider.style.transform = `translateX(${+slider.dataset.pos + 100}%)`;
-          slider.dataset.pos = +slider.dataset.pos + 100;
-        });
+      if (direction === "left") {
+        if (sliders[0].dataset.pos == 0) {
+          document.querySelector(
+            ".container--grid"
+          ).style.transform = `translateX(${+position + -600})%`;
+          sliders.forEach((slider, i) => {
+            slider.style.transform = `translateX(${
+              +slider.dataset.pos + -600
+            }%)`;
+            slider.dataset.pos = +slider.dataset.pos + -600;
+          });
+        } else {
+          document.querySelector(
+            ".container--grid"
+          ).style.transform = `translateX(${+position + 100})%`;
+          sliders.forEach((slider, i) => {
+            slider.style.transform = `translateX(${
+              +slider.dataset.pos + 100
+            }%)`;
+            slider.dataset.pos = +slider.dataset.pos + 100;
+          });
+        }
       }
-      if (direction === "right" && sliders[6].dataset.pos != 0) {
-        document.querySelector(
-          ".container--grid"
-        ).style.transform = `translateX(${+position - 100})%`;
-        const sliders = document.querySelectorAll(".daily-card");
-        sliders.forEach((slider, i) => {
-          slider.style.transform = `translateX(${+slider.dataset.pos - 100}%)`;
-          slider.dataset.pos -= 100;
-        });
+      if (direction === "right") {
+        console.log(sliders[6].dataset.pos);
+        if (sliders[6].dataset.pos == 0) {
+          document.querySelector(
+            ".container--grid"
+          ).style.transform = `translateX(${+position + 600})%`;
+          const sliders = document.querySelectorAll(".daily-card");
+          sliders.forEach((slider, i) => {
+            slider.style.transform = `translateX(${
+              +slider.dataset.pos + 600
+            }%)`;
+            slider.dataset.pos = +slider.dataset.pos + 600;
+          });
+        } else {
+          document.querySelector(
+            ".container--grid"
+          ).style.transform = `translateX(${+position + -100})%`;
+          const sliders = document.querySelectorAll(".daily-card");
+          sliders.forEach((slider, i) => {
+            slider.style.transform = `translateX(${
+              +slider.dataset.pos + -100
+            }%)`;
+            slider.dataset.pos = +slider.dataset.pos + -100;
+          });
+        }
       }
     });
   }

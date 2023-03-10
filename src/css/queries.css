@@ -118,6 +118,10 @@
     padding: 0;
     font-size: 1rem;
   }
+
+  .search-result {
+    font-size: 1.4rem;
+  }
 }
 
 @media (max-width: 44em) {
@@ -139,10 +143,6 @@
 
   .hourly--left {
     transform: translateX(10%);
-  }
-
-  .search-result {
-    font-size: 1.4rem;
   }
 }
 

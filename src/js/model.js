@@ -61,8 +61,9 @@ export const information = {
 };
 
 const createCity = function (data) {
-  const city = data.results.map((city) => {
+  const city = data.results.map((city, i) => {
     return {
+      index: i,
       id: city.id,
       city: city.name,
       state: city.admin1,
@@ -78,9 +79,16 @@ const createCity = function (data) {
 
 const createCurrent = function (data) {
   return {
+    time: `${zeroInserter(data.time.slice(11, data.time.length))}`,
     celsius: `${data.temperature} °C`,
     farenheit: `${(+data.temperature * 1.8 + 32).toFixed(1)} °F`,
-    weatherCode: iconSelector(data.weathercode),
+    weatherCode: iconSelector(
+      data.weathercode,
+      zeroInserter(data.time.slice(11, 13))
+    ),
+    weatherStatus: currentStatus(
+      iconSelector(data.weathercode, zeroInserter(data.time.slice(11, 13)))
+    ),
     windSpeedKilo: `${data.windspeed} km/h`,
     windSpeedMile: `${(Math.round((+data.windspeed / 1.609) * 10) / 10).toFixed(
       1
@@ -263,7 +271,7 @@ const zeroInserter = function (date) {
   return +date < 10 ? `0${date}` : date;
 };
 
-const iconSelector = function (code, time = 0) {
+const iconSelector = function (code, time = new Date().getHours()) {
   const iconCloudSun = [1, 2, 3];
   const iconCloudFog = [45, 48];
   const iconRain = [51, 53, 55, 56, 57];

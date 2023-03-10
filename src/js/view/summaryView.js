@@ -12,6 +12,7 @@ class summaryView extends view {
         <p class="summary-text small temperature">${this._data.celsius}</p>
         <p class="summary-text">Current status</p>
         <svg class="current-status-icon">
+          <title>${this._data.weatherStatus}</title>
           <use href="${icons}#${this._data.weatherCode}"></use>
         </svg>
       </div>
