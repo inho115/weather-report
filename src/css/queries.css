@@ -82,6 +82,10 @@
   .search-result {
     font-size: 1.6rem;
   }
+
+  .alert {
+    font-size: 2rem;
+  }
 }
 
 /* 944px */
@@ -143,10 +147,6 @@
 
   .hourly--left {
     transform: translateX(10%);
-  }
-
-  .search-result {
-    width: 80%;
   }
 }
 

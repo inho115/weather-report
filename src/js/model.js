@@ -11,6 +11,7 @@ export const information = {
   selection: [],
   map: {},
   image: {},
+  query: "",
   date: {
     todayString: "",
     weekLaterString: "",
@@ -61,20 +62,29 @@ export const information = {
 };
 
 const createCity = function (data) {
-  const city = data.results.map((city, i) => {
-    return {
-      index: i,
-      id: city.id,
-      city: city.name,
-      state: city.admin1,
-      country: city.country,
-      countryId: city.country_id,
-      timezone: city.timezone,
-      lat: city.latitude,
-      lng: city.longitude,
-    };
-  });
-  return city;
+  try {
+    if (!data.results) {
+      throw new Error(
+        `There is no matching city ${information.query}. Please try again.`
+      );
+    }
+    const city = data.results.map((city, i) => {
+      return {
+        index: i,
+        id: city.id,
+        city: city.name,
+        state: city.admin1,
+        country: city.country,
+        countryId: city.country_id,
+        timezone: city.timezone,
+        lat: city.latitude,
+        lng: city.longitude,
+      };
+    });
+    return city;
+  } catch (err) {
+    throw err;
+  }
 };
 
 const createCurrent = function (data) {
@@ -166,11 +176,14 @@ const createDaily = function (data) {
 
 export const loadCitySearchResults = async function (query) {
   try {
+    if (query.length === 0) {
+      throw new Error("You have entered empty string. Please try again.");
+    }
     const data = await fetch(`${CITY_API_URL}search?name=${query}`);
     const response = await data.json();
     information.cities = createCity(response);
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
@@ -282,7 +295,7 @@ const iconSelector = function (code, time = new Date().getHours()) {
   const iconCloudLightning = [95, 96, 99];
 
   if (code === 0) {
-    return time > 4 && time < 18 ? "icon-sunny" : "icon-moon-stars";
+    return time > 4 && time < 18 ? "icon-sun" : "icon-moon-stars";
   } else if (iconCloudSun.some((weatherCode) => weatherCode === code)) {
     return time > 4 && time < 18 ? "icon-cloud-sun" : "icon-cloud-moon";
   } else if (iconCloudFog.some((weatherCode) => weatherCode === code)) {
@@ -304,7 +317,7 @@ const iconSelector = function (code, time = new Date().getHours()) {
 
 const currentStatus = function (weatherCode) {
   switch (weatherCode) {
-    case "icon-sunny":
+    case "icon-sun":
       return "Clear sky";
     case "icon-moon-stars":
       return "Clear sky";
@@ -322,5 +335,7 @@ const currentStatus = function (weatherCode) {
       return "Snowing";
     case "icon-cloud-lightning":
       return "Thunderstorm";
+    case "icon-cloud-fog":
+      return "foggy";
   }
 };

@@ -11,11 +11,11 @@ import dailyView from "./view/dailyView.js";
 
 const controlCitySearch = async function () {
   try {
-    const query = searchView._getQuery();
-    await model.loadCitySearchResults(query);
+    model.information.query = searchView._getQuery();
+    await model.loadCitySearchResults(model.information.query);
     resultsView.render(model.information.cities);
   } catch (err) {
-    console.log(err);
+    resultsView._renderError(err);
   }
 };
 
@@ -51,7 +51,6 @@ const controlSelect = async function (id) {
 
 const controlPagination = function (direction) {
   model.changePage(direction);
-
   hourlyView.render(
     model.information.hourly.slice(
       model.information.currentPage[0],

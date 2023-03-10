@@ -22,14 +22,12 @@ class SearchView extends view {
       const container = document.querySelector(".information");
       e.preventDefault();
       resultsView._parentEl.classList.remove("hidden");
-      document.querySelector(".section--hourly").classList.remove("none");
-      document.querySelector(".section--daily").classList.remove("none");
-      container.classList.add("slide-up");
       handler();
     });
   }
 
-  _generateMarkup = function (index) {
+  _generateMarkup = function () {
+    this._container.classList.add("slide-up");
     let markup;
     if (this._data.city && this._data.state && this._data.country) {
       markup = `
