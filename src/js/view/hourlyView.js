@@ -114,9 +114,9 @@ class hourlyView extends view {
 
       detail.classList.toggle("hidden-info");
 
-      detail.classList.contains("hidden-info")
-        ? (detail.style.height = "0")
-        : (detail.style.height = "100%");
+      // detail.classList.contains("hidden-info")
+      //   ? (detail.style.height = "0")
+      //   : (detail.style.height = "100%");
     });
   }
 
