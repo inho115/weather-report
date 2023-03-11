@@ -313,6 +313,7 @@
 }
 
 .hidden-info {
+  height: 0.01px;
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
