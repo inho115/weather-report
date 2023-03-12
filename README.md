@@ -18,6 +18,11 @@ Weather Assistant provides current, hourly, and daily information up to next sev
 - core-js (ver 3.29.0)
 - regenerator-runtime (ver 0.13.11)
 ## Description 
+- Once user visits the website, weather assistant welcomes user by showing a current location and search bar that allows user to search any city on earth.<br/>
+![Capture1](https://user-images.githubusercontent.com/97544886/224522613-c4e33748-27eb-4324-8f56-830488f1438b.JPG)
+- If there are any matching result for user's input, weather assistant suggest cities with same name up to 10 suggestions.
+![Capture2](https://user-images.githubusercontent.com/97544886/224522678-8a8159de-c533-4b2a-b6bd-b66a0eb3105a.JPG)
+
 
 ## License 
 - Copyright (c) 2023 In ho Han
