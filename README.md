@@ -46,3 +46,7 @@ Weather Assistant provides current, hourly, and daily information up to next sev
 ## Thanks to
 - <a href="https://www.udemy.com/user/jonasschmedtmann/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Webindex_Catchall_la.EN_cc.CA&utm_term=_._ag_119831896715_._ad_533102824920_._kw__._de_c_._dm__._pl__._ti_dsa-423967289464_._li_9000910_._pd__._&matchtype=&gclid=Cj0KCQiA6rCgBhDVARIsAK1kGPKPVDeN_Q4-z80u10OX9Ig540Dbr_XlxbYkkADXGTnZgvQOjOA1LssaAuaHEALw_wcB">Jonas Schmedtmann</a>
   - An instructor at Udemy, I was able to learn how javascript works and how I can implement MVC structure without using any frameworks.
+## Contact
+- If you have any question related to this project, please contact me with any of these method.
+  - bhan951105@gmail.com
+  - <a href="https://www.linkedin.com/in/ihhan/">LinkedIn</a>
