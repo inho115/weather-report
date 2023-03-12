@@ -472,6 +472,12 @@
   border: none;
 }
 
+.footer-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /******************************* ERROR *******************************************/
 
 .alert {
