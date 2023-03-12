@@ -1,7 +1,9 @@
 # Weather Assistant
+Link to website <a href="https://weather-assistant.netlify.app/">Weather Assistant</a><br/>
 By In ho Han <br/>
 A simple Responsive website project built by Javascript and API.<br/>
 Weather Assistant allow users to gather weather information of cities all around the world.<br/>
+Weather Assistant provides current, hourly, and daily information up to next seven days.<br/>
 ## Technologies Used
 - JavaScript (Vanilla JS)
 - HTML
@@ -15,5 +17,7 @@ Weather Assistant allow users to gather weather information of cities all around
 ## Dependencies
 - core-js (ver 3.29.0)
 - regenerator-runtime (ver 0.13.11)
+## Description 
+
 ## License 
-- Copyright (c) In ho Han
+- Copyright (c) 2023 In ho Han
