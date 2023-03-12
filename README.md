@@ -26,7 +26,12 @@ Weather Assistant provides current, hourly, and daily information up to next sev
 ![Capture3](https://user-images.githubusercontent.com/97544886/224522805-376cfd06-16fb-4bd2-9fb2-7c93926fdf89.JPG)
 - On introduction section, once user selects the city, it will display summary of weather including temperature, current status of weather, wind speed, and wind direction.
 ![Capture4](https://user-images.githubusercontent.com/97544886/224522861-1fadfe11-a002-4b27-841c-f52275cf303d.JPG)
-
-
+- For hourly section, it will display weather information up to 7 hours per page.
+- For more detailed information, user can click chevron down icon.
+![Capture5](https://user-images.githubusercontent.com/97544886/224522958-7ee43757-8ab5-4d88-be2d-d1844ac36caa.JPG)
+- For daily section, it will display 7 cards that displays information of the day starting from current day (based on the day when user visits).
+![Capture6](https://user-images.githubusercontent.com/97544886/224523016-5b267a3e-9deb-4ac1-9f98-388c0dcc4723.JPG)
+- On mobile view, a presentation of the website switch to single day view with left and right button which allow users to move to next card.
+- ![Capture7](https://user-images.githubusercontent.com/97544886/224523106-4398611b-23fb-4a7f-a356-2b005a754299.JPG)
 ## License 
 - Copyright (c) 2023 In ho Han
