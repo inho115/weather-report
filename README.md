@@ -9,6 +9,14 @@ Weather Assistant provides current, hourly, and daily information up to next sev
 - HTML
 - CSS
 - Parcel (ver 2.8.3)
+## Implemented Concepts
+- Classes
+- Inheritance
+- Objects
+- JSON 
+- API
+- Asynchronous function
+- Destructuring assignment
 ## Third party technologies
 - <a href="https://leafletjs.com/">Leaflet</a>
   - Leaflet is an awesome tool to implement when project requires display of a map.
@@ -35,3 +43,6 @@ Weather Assistant provides current, hourly, and daily information up to next sev
 - ![Capture7](https://user-images.githubusercontent.com/97544886/224523106-4398611b-23fb-4a7f-a356-2b005a754299.JPG)
 ## License 
 - Copyright (c) 2023 In ho Han
+## Thanks to
+- <a href="https://www.udemy.com/user/jonasschmedtmann/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Webindex_Catchall_la.EN_cc.CA&utm_term=_._ag_119831896715_._ad_533102824920_._kw__._de_c_._dm__._pl__._ti_dsa-423967289464_._li_9000910_._pd__._&matchtype=&gclid=Cj0KCQiA6rCgBhDVARIsAK1kGPKPVDeN_Q4-z80u10OX9Ig540Dbr_XlxbYkkADXGTnZgvQOjOA1LssaAuaHEALw_wcB">Jonas Schmedtmann</a>
+  - An instructor at Udemy, I was able to learn how javascript works and how I can implement MVC structure without using any frameworks.
