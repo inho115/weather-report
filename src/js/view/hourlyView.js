@@ -116,7 +116,7 @@ class hourlyView extends view {
 
       detail.classList.contains("hidden-info")
         ? (detail.style.height = "0.01px")
-        : (detail.style.height = "100%");
+        : (detail.style.height = "auto");
     });
   }
 
