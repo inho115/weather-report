@@ -20,8 +20,12 @@ Weather Assistant provides current, hourly, and daily information up to next sev
 ## Description 
 - Once user visits the website, weather assistant welcomes user by showing a current location and search bar that allows user to search any city on earth.<br/>
 ![Capture1](https://user-images.githubusercontent.com/97544886/224522613-c4e33748-27eb-4324-8f56-830488f1438b.JPG)
-- If there are any matching result for user's input, weather assistant suggest cities with same name up to 10 suggestions.
+- If there are any matching result for user's input, weather assistant suggest up to 10 cities with same name.
 ![Capture2](https://user-images.githubusercontent.com/97544886/224522678-8a8159de-c533-4b2a-b6bd-b66a0eb3105a.JPG)
+- When user's input is considered inappropriate (empty or does not exist), the weather assistant displays error message.
+![Capture3](https://user-images.githubusercontent.com/97544886/224522805-376cfd06-16fb-4bd2-9fb2-7c93926fdf89.JPG)
+- On introduction section, once user selects the city, it will display summary of weather including temperature, current status of weather, wind speed, and wind direction.
+![Capture4](https://user-images.githubusercontent.com/97544886/224522861-1fadfe11-a002-4b27-841c-f52275cf303d.JPG)
 
 
 ## License 
