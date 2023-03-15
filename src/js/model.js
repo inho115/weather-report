@@ -177,6 +177,7 @@ export const loadWeather = async function () {
   information.current = createCurrent(response.current_weather);
   information.hourly = createHourly(response.hourly);
   information.daily = createDaily(response.daily);
+  console.log(information.daily);
 };
 
 export const changePage = function (direction) {
