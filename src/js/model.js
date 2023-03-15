@@ -12,52 +12,10 @@ export const information = {
   map: {},
   image: {},
   query: "",
-  date: {
-    todayString: "",
-    weekLaterString: "",
-    todayNum: [],
-    weekLaterNum: [],
-  },
+  date: {},
   current: [],
-  hourly: [
-    {
-      humidity: "",
-      celsius: "",
-      farenheit: "",
-      visibilityKilo: "",
-      visibilityMile: "",
-      originalWeatherCode: "",
-      weatherCode: "",
-      weatherStatus: "",
-      windDirection: "",
-      windSpeedKilo: "",
-      windSpeedMile: "",
-      snowDepthMeter: "",
-      snowDepthFeet: "",
-      feelsLikeCelsius: "",
-      feelsLikeFarenheit: "",
-      precipitation: "",
-      cloudCover: "",
-    },
-  ],
-  daily: [
-    {
-      date: "",
-      rainSum: "",
-      snowfallSum: "",
-      sunrise: "",
-      sunset: "",
-      temperatureMax: "",
-      temperatureMin: "",
-      uvMax: "",
-      originalWeatherCode: "",
-      weatherCode: "",
-      weatherStatus: "",
-      windDirection: "",
-      windSpeedKilo: "",
-      windSpeedMile: "",
-    },
-  ],
+  hourly: [{}],
+  daily: [{}],
   currentPage: [0, 7],
 };
 
@@ -141,11 +99,8 @@ const createDaily = function (data) {
   const daily = data.rain_sum.map((info, i) => {
     return {
       date:
-        +information.date.todayString.slice(5, 6) + i >= 10
-          ? information.date.todayString.slice(0, 4) +
-            `${+information.date.todayString.slice(5, 6) + i}`
-          : information.date.todayString.slice(0, 5) +
-            `${+information.date.todayString.slice(5, 6) + i}`,
+        information.date.todayString.slice(0, 4) +
+        (+information.date.todayDate + i),
       rainSum: `${data.rain_sum[i]} mm`,
       snowfallSum: `${data.snowfall_sum[i]} cm`,
       sunrise: `${data.sunrise[i].slice(11, data.sunrise[i].length)} AM`,
@@ -222,6 +177,7 @@ export const loadWeather = async function () {
   information.current = createCurrent(response.current_weather);
   information.hourly = createHourly(response.hourly);
   information.daily = createDaily(response.daily);
+  console.log(information.daily);
 };
 
 export const changePage = function (direction) {
@@ -269,6 +225,7 @@ export const getDate = function () {
   const formattedNewDate = `${newMonthAlpha} ${newDay}, ${newYear}`;
   const formattedNewNumDate = `${newYear}-${newMonthNum}-${newDay}`;
 
+  information.date.todayDate = day;
   information.date.todayNum = formattedNumDate;
   information.date.todayString = formattedAlphaDate;
   information.date.weekLaterNum = formattedNewNumDate;
@@ -327,8 +284,10 @@ const currentStatus = function (weatherCode) {
       return "Cloudy";
     case "icon-rain":
       return "Slightly raining";
+    case "icon-rain-alot":
+      return "Raining";
     case "icon-rain-violent":
-      return "Rainy day";
+      return "Raining";
     case "icon-snow":
       return "Slightly snowing";
     case "icon-snow-alot":

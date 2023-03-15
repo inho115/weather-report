@@ -43,6 +43,7 @@ const controlSelect = async function (id) {
     hourlyView.render(model.information.hourly.slice(0, 7));
 
     // 7. render daily
+    console.log(model.information.daily);
     dailyView.render(model.information.daily);
   } catch (err) {
     console.log(err);
