@@ -119,7 +119,6 @@ class dailyView extends view {
         }
       }
       if (direction === "right") {
-        console.log(sliders[6].dataset.pos);
         if (sliders[6].dataset.pos == 0) {
           document.querySelector(
             ".container--grid"
