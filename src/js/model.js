@@ -99,8 +99,14 @@ const createDaily = function (data) {
   const daily = data.rain_sum.map((info, i) => {
     return {
       date:
-        information.date.todayString.slice(0, 4) +
-        (+information.date.todayDate + i),
+        information.date.todayDate + i > +information.date.lastDayofMonth
+          ? information.date.nextMonth +
+            ` ` +
+            zeroInserter(
+              +information.date.todayDate + i - information.date.lastDayofMonth
+            )
+          : information.date.todayString.slice(0, 4) +
+            (+information.date.todayDate + i),
       rainSum: `${data.rain_sum[i]} mm`,
       snowfallSum: `${data.snowfall_sum[i]} cm`,
       sunrise: `${data.sunrise[i].slice(11, data.sunrise[i].length)} AM`,
@@ -211,6 +217,7 @@ export const getDate = function () {
   ];
   const today = new Date();
   const monthAlpha = months[today.getMonth()];
+  const nextMonth = months[today.getMonth() + 1];
   const monthNum = zeroInserter(today.getMonth() + 1);
   const day = zeroInserter(today.getDate());
   const year = today.getFullYear();
@@ -224,8 +231,11 @@ export const getDate = function () {
   const newYear = newDate.getFullYear();
   const formattedNewDate = `${newMonthAlpha} ${newDay}, ${newYear}`;
   const formattedNewNumDate = `${newYear}-${newMonthNum}-${newDay}`;
+  const lastDayofMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
+  information.date.lastDayofMonth = lastDayofMonth.toString().slice(8, 10);
   information.date.todayDate = day;
+  information.date.nextMonth = nextMonth;
   information.date.todayNum = formattedNumDate;
   information.date.todayString = formattedAlphaDate;
   information.date.weekLaterNum = formattedNewNumDate;

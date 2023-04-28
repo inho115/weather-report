@@ -84,6 +84,6 @@ const init = function () {
   resultsView.addHandlerSelect(controlSelect);
   hourlyView.addHandlerExpand();
   hourlyView.addHandlerPagination(controlPagination);
-  dailyView.addHanlderPagination();
+  dailyView.addHandlerPagination();
 };
 init();

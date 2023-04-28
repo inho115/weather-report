@@ -89,7 +89,7 @@ class dailyView extends view {
     return markup;
   }
 
-  addHanlderPagination() {
+  addHandlerPagination() {
     this._daily.addEventListener("click", function (e) {
       const btn = e.target.closest(".pagination-btn");
       const direction = btn.dataset.arrow;
