@@ -96,17 +96,22 @@ const createHourly = function (data) {
 };
 
 const createDaily = function (data) {
+  console.log(
+    `${+information.date.todayDate + +1 - +information.date.lastDayofMonth}`
+  );
   const daily = data.rain_sum.map((info, i) => {
     return {
       date:
-        information.date.todayDate + i > +information.date.lastDayofMonth
+        +information.date.todayDate + i > +information.date.lastDayofMonth
           ? information.date.nextMonth +
             ` ` +
             zeroInserter(
-              +information.date.todayDate + i - information.date.lastDayofMonth
+              +information.date.todayDate +
+                +i -
+                +information.date.lastDayofMonth
             )
           : information.date.todayString.slice(0, 4) +
-            (+information.date.todayDate + i),
+            zeroInserter(+information.date.todayDate + i),
       rainSum: `${data.rain_sum[i]} mm`,
       snowfallSum: `${data.snowfall_sum[i]} cm`,
       sunrise: `${data.sunrise[i].slice(11, data.sunrise[i].length)} AM`,
