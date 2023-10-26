@@ -1,10 +1,4 @@
 import { async } from "regenerator-runtime";
-import {
-  CITY_API_URL,
-  WEATHER_API_URL,
-  HOURLY_PARAMETER,
-  DAILY_PARAMETER,
-} from "./config.js";
 
 export const information = {
   cities: [],
@@ -142,7 +136,7 @@ export const loadCitySearchResults = async function (query) {
     if (query.length === 0) {
       throw new Error("You have entered empty string. Please try again.");
     }
-    const data = await fetch(`${CITY_API_URL}search?name=${query}`);
+    const data = await fetch(`${process.env.CITY_API_URL}search?name=${query}`);
     const response = await data.json();
     information.cities = createCity(response);
   } catch (err) {
@@ -178,7 +172,7 @@ export const loadSelect = async function (id) {
 
 export const loadWeather = async function () {
   const request = await fetch(
-    `${WEATHER_API_URL}/?latitude=${information.selection.lat}&longitude=${information.selection.lng}&current_weather=true${HOURLY_PARAMETER}${DAILY_PARAMETER}&start_date=${information.date.todayNum}&end_date=${information.date.weekLaterNum}`
+    `${process.env.WEATHER_API_URL}/?latitude=${information.selection.lat}&longitude=${information.selection.lng}&current_weather=true${process.env.HOURLY_PARAMETER}${process.env.DAILY_PARAMETER}&start_date=${information.date.todayNum}&end_date=${information.date.weekLaterNum}`
   );
   const response = await request.json();
 
@@ -228,7 +222,10 @@ export const getDate = function () {
   const newDate = addWeeks(date, 1);
   const newMonthAlpha = months[newDate.getMonth()];
   const newMonthNum = zeroInserter(newDate.getMonth() + 1);
-  const newDay = zeroInserter(newDate.getDate() - 1);
+  const newDay =
+    newDate.getDate() != 1
+      ? zeroInserter(newDate.getDate() - 1)
+      : zeroInserter(newDate.getDate());
   const newYear = newDate.getFullYear();
   const formattedNewDate = `${newMonthAlpha} ${newDay}, ${newYear}`;
   const formattedNewNumDate = `${newYear}-${newMonthNum}-${newDay}`;
